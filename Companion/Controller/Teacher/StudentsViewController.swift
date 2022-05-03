@@ -22,7 +22,7 @@ final class StudentsViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
     }
 
     private func setupNavigationController() {

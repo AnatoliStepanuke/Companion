@@ -1,6 +1,6 @@
 import UIKit
 
-final class CustomTransparentUITextField: UITextField {
+final class CustomAuthtUITextField: UITextField {
     // MARK: - Init
     init(placeholderText: String) {
         super.init(frame: .zero)
@@ -30,6 +30,6 @@ final class CustomTransparentUITextField: UITextField {
     }
 
     private func setupBackgroundColor() {
-        backgroundColor = AppColor.backgrounColor
+        backgroundColor = AppColor.shadowColor
     }
 }

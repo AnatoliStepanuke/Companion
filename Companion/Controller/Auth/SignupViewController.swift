@@ -9,9 +9,9 @@ final class SignupViewController: UIViewController {
     private let mainStackView = UIStackView()
     private let databaseReferenceToStudents = Database.database().reference().child("students")
     private let databaseReferenceToTeachers = Database.database().reference().child("teachers")
-    private let nameTextField = CustomTransparentUITextField(placeholderText: "Name")
-    private let emailTextField = CustomTransparentUITextField(placeholderText: "Email")
-    private let passwordTextField = CustomTransparentUITextField(placeholderText: "Password")
+    private let nameTextField = CustomAuthtUITextField(placeholderText: "Name")
+    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
+    private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
     private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: .black)
 
     // MARK: - Lifecycle
@@ -24,7 +24,7 @@ final class SignupViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
         view.addSubview(mainStackView)
     }
 
