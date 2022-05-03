@@ -30,7 +30,7 @@
 		DC6F677D28215EA400481FE8 /* UserManager+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677C28215EA400481FE8 /* UserManager+Constants.swift */; };
 		DC6F677F28215EAA00481FE8 /* UISegmentedControl+addItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */; };
 		DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F678028215EBF00481FE8 /* UserManager.swift */; };
-		DC6F678328215EC800481FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F678228215EC800481FE8 /* Schedule.swift */; };
+		DC6F67852821653900481FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F67842821653900481FE8 /* Schedule.swift */; };
 		DC7E040027A98A1D00E036AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E03FF27A98A1D00E036AE /* AppDelegate.swift */; };
 		DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E040127A98A1D00E036AE /* SceneDelegate.swift */; };
 		DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7E040327A98A1D00E036AE /* ScheduleViewController.swift */; };
@@ -77,7 +77,7 @@
 		DC6F677C28215EA400481FE8 /* UserManager+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+Constants.swift"; sourceTree = "<group>"; };
 		DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+addItems.swift"; sourceTree = "<group>"; };
 		DC6F678028215EBF00481FE8 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		DC6F678228215EC800481FE8 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Schedule.swift; path = "../../../Companion-realization-adding-own-schedule/Companion/Model/Schedule.swift"; sourceTree = "<group>"; };
+		DC6F67842821653900481FE8 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		DC7E03FC27A98A1D00E036AE /* Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Companion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7E03FF27A98A1D00E036AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC7E040127A98A1D00E036AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		DC7E041927A98F5D00E036AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DC6F678228215EC800481FE8 /* Schedule.swift */,
+				DC6F67842821653900481FE8 /* Schedule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -419,7 +419,6 @@
 				DCB2046427B442AB00B26AAB /* UIView+Layout.swift in Sources */,
 				DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */,
 				DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */,
-				DC6F678328215EC800481FE8 /* Schedule.swift in Sources */,
 				DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */,
 				DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */,
 				DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */,
@@ -433,6 +432,7 @@
 				DC0AF02F27BAD3EF0006830F /* ScheduleCell.swift in Sources */,
 				DC92520127AE84DC00CC200B /* Color.swift in Sources */,
 				DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */,
+				DC6F67852821653900481FE8 /* Schedule.swift in Sources */,
 				DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */,
 				DC97645C281D4D620088F271 /* UserDefaults+keys.swift in Sources */,
 				DC15FF79280A048700F2D10B /* StudentsViewController.swift in Sources */,
