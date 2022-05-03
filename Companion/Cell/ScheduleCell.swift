@@ -2,24 +2,45 @@ import UIKit
 
 final class ScheduleCell: UITableViewCell {
     // MARK: - Constants
-    private let nameObjectLabel = UILabel()
-    private let typeObjectLabel = UILabel()
+    // UIStackView()
+    private let containerStackView = UIStackView()
+    private let topVerticalStackView = UIStackView()
+    private let bottomVerticalStackView = UIStackView()
+    private let nameAndTypeSubjectStackView = UIStackView()
+    private let buildingAndAudienceNumberStackView = UIStackView()
+    private let startAndEndTimeSubjectStackView = UIStackView()
+    private let teacherNameStackView = UIStackView()
+
+    // UILabel()
+    private let nameSubjectLabel = UILabel()
+    private let typeSubjectLabel = UILabel()
     private let subjectStartTimeLabel = UILabel()
+    private let separatorSubjectTimeLabel = UILabel()
     private let subjectEndTimeLabel = UILabel()
-    private let audienceNumberLabel = UILabel()
     private let teacherNameLabel = UILabel()
+    private let audienceNumberLabel = UILabel()
+    private let separatorBuildingAndAudienceLabel = UILabel()
+    private let buildingNumberLabel = UILabel()
 
     // MARK: - Override methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        setupView()
-        setupNameObjectLabel()
-        setupTypeObjectLabel()
-        setupSubjectStartTimeLabel()
-        setupSubjectEndTimeLabel()
+        setupContainerView()
+        setupTopVerticalStackView()
+        setupBottomVerticalStackView()
+        setupNameAndTypeSubjectStackView()
+        setupStartAndEndTimeSubjectStackView()
+        setupTeacherNameStackView()
+        setupBuildingAndAudienceNumberStackView()
+        setupNameSubjectLabel()
+        setupTypeSubjectLabel()
+        setupBuildingNumberLabel()
+        setupSeparatorBuildingAndAudienceLabel()
         setupAudienceNumberLabel()
         setupTeacherNameLabel()
+        setupSubjectStartTimeLabel()
+        setupSeparatorSubjectTimeLabel()
+        setupSubjectEndTimeLabel()
     }
 
     // MARK: - Init
@@ -28,81 +49,154 @@ final class ScheduleCell: UITableViewCell {
     }
 
     // MARK: - Setups
-    private func setupView() {
-        addSubview(nameObjectLabel)
-        addSubview(typeObjectLabel)
-        addSubview(subjectStartTimeLabel)
-        addSubview(subjectEndTimeLabel)
-        addSubview(audienceNumberLabel)
-        addSubview(teacherNameLabel)
-    }
-
-    private func setupNameObjectLabel() {
-        nameObjectLabel.anchor(
-            top: safeAreaLayoutGuide.topAnchor,
+    private func setupContainerView() {
+        self.addSubview(containerStackView)
+        containerStackView.axis = .vertical
+        containerStackView.anchor(
+            top: topAnchor,
             leading: leadingAnchor,
             trailing: trailingAnchor,
             bottom: bottomAnchor,
-            padding: .init(top: -64, left: 20, bottom: 0, right: 120))
-        nameObjectLabel.font = UIFont.boldSystemFont(ofSize: 21)
+            padding: .init(
+                top: 6,
+                left: 2,
+                bottom: 6,
+                right: 2
+            )
+        )
+        containerStackView.backgroundColor = AppColor.whiteColor
+        containerStackView.layer.cornerRadius = 12
+        containerStackView.addArrangedSubview(topVerticalStackView)
+        containerStackView.addArrangedSubview(bottomVerticalStackView)
     }
 
-    private func setupTypeObjectLabel() {
-        typeObjectLabel.anchor(
-            top: nameObjectLabel.bottomAnchor,
-            leading: leadingAnchor,
-            trailing: trailingAnchor,
-            bottom: bottomAnchor,
-            padding: .init(top: -140, left: 20, bottom: 0, right: 20))
-        typeObjectLabel.font = UIFont.systemFont(ofSize: 14)
+    // MARK: - TopVerticalStackView
+    private func setupTopVerticalStackView() {
+        topVerticalStackView.axis = .horizontal
+        topVerticalStackView.anchor(
+            top: containerStackView.topAnchor,
+            leading: containerStackView.leadingAnchor,
+            trailing: containerStackView.trailingAnchor,
+            bottom: bottomVerticalStackView.topAnchor,
+            padding: .init(top: 6, left: 12, bottom: 0, right: 12)
+        )
+        topVerticalStackView.addArrangedSubview(nameAndTypeSubjectStackView)
+        topVerticalStackView.addArrangedSubview(buildingAndAudienceNumberStackView)
+        topVerticalStackView.alignment = .lastBaseline
     }
 
-    private func setupSubjectStartTimeLabel() {
-        subjectStartTimeLabel.anchor(
-            top: safeAreaLayoutGuide.topAnchor,
-            leading: nameObjectLabel.trailingAnchor,
-            trailing: trailingAnchor,
-            bottom: bottomAnchor,
-            padding: .init(top: -68, left: 10, bottom: 0, right: 20))
-        subjectStartTimeLabel.font = UIFont.systemFont(ofSize: 14)
+    private func setupNameAndTypeSubjectStackView() {
+        nameAndTypeSubjectStackView.axis = .vertical
+        nameAndTypeSubjectStackView.addArrangedSubview(nameSubjectLabel)
+        nameAndTypeSubjectStackView.addArrangedSubview(typeSubjectLabel)
+        nameAndTypeSubjectStackView.distribution = .fillProportionally
     }
 
-    private func setupSubjectEndTimeLabel() {
-        subjectEndTimeLabel.anchor(
-            top: subjectStartTimeLabel.bottomAnchor,
-            leading: nameObjectLabel.trailingAnchor,
-            trailing: trailingAnchor,
-            bottom: bottomAnchor,
-            padding: .init(top: -148, left: 10, bottom: 0, right: 20))
-        subjectEndTimeLabel.font = UIFont.systemFont(ofSize: 14)
+    private func setupNameSubjectLabel() {
+        nameSubjectLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        nameSubjectLabel.textAlignment = .left
+        nameSubjectLabel.numberOfLines = 0
+    }
+
+    private func setupTypeSubjectLabel() {
+        typeSubjectLabel.font = UIFont.systemFont(ofSize: 15)
+        typeSubjectLabel.textAlignment = .left
+    }
+
+    private func setupBuildingAndAudienceNumberStackView() {
+        buildingAndAudienceNumberStackView.axis = .horizontal
+        buildingAndAudienceNumberStackView.widthAnchor.constraint(
+            equalTo: topVerticalStackView.widthAnchor,
+            multiplier: 0.15
+        ).isActive = true
+        buildingAndAudienceNumberStackView.addArrangedSubview(buildingNumberLabel)
+        buildingAndAudienceNumberStackView.addArrangedSubview(separatorBuildingAndAudienceLabel)
+        buildingAndAudienceNumberStackView.addArrangedSubview(audienceNumberLabel)
+        buildingAndAudienceNumberStackView.spacing = 2
+        buildingAndAudienceNumberStackView.distribution = .fillProportionally
+    }
+
+    private func setupBuildingNumberLabel() {
+        buildingNumberLabel.font = UIFont.systemFont(ofSize: 15)
+        buildingNumberLabel.textAlignment = .left
+    }
+
+    private func setupSeparatorBuildingAndAudienceLabel() {
+        separatorBuildingAndAudienceLabel.text = "\u{002F}"
+        separatorBuildingAndAudienceLabel.textAlignment = .left
     }
 
     private func setupAudienceNumberLabel() {
-        audienceNumberLabel.anchor(
-            top: subjectEndTimeLabel.bottomAnchor,
-            leading: leadingAnchor,
-            trailing: trailingAnchor,
-            bottom: bottomAnchor,
-            padding: .init(top: -36, left: 275, bottom: 0, right: 20))
-        audienceNumberLabel.font = UIFont.systemFont(ofSize: 14)
+        audienceNumberLabel.font = UIFont.systemFont(ofSize: 15)
+        audienceNumberLabel.textAlignment = .left
+    }
+
+    // MARK: - BottomVerticalStackView
+    private func setupBottomVerticalStackView() {
+        bottomVerticalStackView.axis = .horizontal
+        bottomVerticalStackView.anchor(
+            top: topVerticalStackView.bottomAnchor,
+            leading: containerStackView.leadingAnchor,
+            trailing: containerStackView.trailingAnchor,
+            bottom: containerStackView.bottomAnchor,
+            padding: .init(top: 0, left: 12, bottom: 6, right: 6)
+        )
+        bottomVerticalStackView.heightAnchor.constraint(
+            equalTo: containerStackView.heightAnchor,
+            multiplier: 0.45
+        ).isActive = true
+        bottomVerticalStackView.addArrangedSubview(teacherNameStackView)
+        bottomVerticalStackView.addArrangedSubview(startAndEndTimeSubjectStackView)
+        bottomVerticalStackView.alignment = .center
+    }
+
+    private func setupTeacherNameStackView() {
+        teacherNameStackView.widthAnchor.constraint(
+            equalTo: bottomVerticalStackView.widthAnchor,
+            multiplier: 0.5
+        ).isActive = true
+        teacherNameStackView.addArrangedSubview(teacherNameLabel)
     }
 
     private func setupTeacherNameLabel() {
-        teacherNameLabel.anchor(
-            top: typeObjectLabel.bottomAnchor,
-            leading: leadingAnchor,
-            trailing: trailingAnchor,
-            bottom: bottomAnchor,
-            padding: .init(top: -36, left: 20, bottom: 0, right: 20))
-        teacherNameLabel.font = UIFont.systemFont(ofSize: 14)
+        teacherNameLabel.font = UIFont.systemFont(ofSize: 13)
+        teacherNameLabel.textAlignment = .left
+        teacherNameLabel.numberOfLines = 0
+    }
+
+    private func setupStartAndEndTimeSubjectStackView() {
+        startAndEndTimeSubjectStackView.axis = .vertical
+        startAndEndTimeSubjectStackView.widthAnchor.constraint(
+            equalTo: bottomVerticalStackView.widthAnchor,
+            multiplier: 0.2
+        ).isActive = true
+        startAndEndTimeSubjectStackView.addArrangedSubview(subjectStartTimeLabel)
+        startAndEndTimeSubjectStackView.addArrangedSubview(separatorSubjectTimeLabel)
+        startAndEndTimeSubjectStackView.addArrangedSubview(subjectEndTimeLabel)
+    }
+
+    private func setupSubjectStartTimeLabel() {
+        subjectStartTimeLabel.font = UIFont.systemFont(ofSize: 13)
+        subjectStartTimeLabel.textAlignment = .right
+    }
+
+    private func setupSeparatorSubjectTimeLabel() {
+        separatorSubjectTimeLabel.text = "\u{2E3B}"
+        separatorSubjectTimeLabel.textAlignment = .right
+    }
+
+    private func setupSubjectEndTimeLabel() {
+        subjectEndTimeLabel.font = UIFont.systemFont(ofSize: 13)
+        subjectEndTimeLabel.textAlignment = .right
     }
 
     // MARK: - API
     func configure(using schedule: Schedule) {
-        nameObjectLabel.text = schedule.nameSubject
-        typeObjectLabel.text = schedule.typeSubject
-        subjectStartTimeLabel.text = "\(schedule.subjectStartTime)"
-        subjectEndTimeLabel.text = "\(schedule.subjectEndTime)"
+        nameSubjectLabel.text = schedule.nameSubject
+        typeSubjectLabel.text = schedule.typeSubject
+        subjectStartTimeLabel.text = "\(schedule.subjectStartTimeDescription)"
+        subjectEndTimeLabel.text = "\(schedule.subjectEndTimeDescription)"
+        buildingNumberLabel.text = "\(schedule.buildingNumber)"
         audienceNumberLabel.text = "\(schedule.audienceNumber)"
         teacherNameLabel.text = schedule.teacherName
     }

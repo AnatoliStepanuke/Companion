@@ -1,53 +1,108 @@
 import UIKit
 
 final class ScheduleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    // MARK: - Properties
-    // MARK: - Private
-    private var mondaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var tuesdaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var wednesdaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var thursdaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var fridaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var saturdaySchedule: [Schedule] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    private var rowsToDisplay: [Schedule] = []
-
     // MARK: - Constants
     // MARK: - Private
-    private let tableView = UITableView(frame: .zero, style: .grouped)
-    private let cell = UITableViewCell()
-    private let date = Date()
-    lazy private var segmentedControl: UISegmentedControl = {
-        let itemedSegmentedControl = UISegmentedControl(items: [
+    private let tableView = UITableView(frame: .zero, style: .plain)
+    private let scheduleStackView = UIStackView()
+
+    // MARK: - Properties
+    // MARK: - Private
+    private var typesOfWeeksSegmentedControl = UISegmentedControl() {
+        didSet {
+            updateCurrentSchedule()
+        }
+    }
+    private var daysOfWeekSegmentedControl = UISegmentedControl() {
+        didSet {
+            updateCurrentSchedule()
+        }
+    }
+    private var scheduleFromUserDefaults: [Schedule] = []
+    private var filteredSchedule: [Schedule] = []
+    private var type: ScheduleWeekType?
+
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        setupNavigationController()
+        setupScheduleStuckView()
+        setupTypesOfWeekSegmentedControl()
+        setupDaysOfWeekSegmentedControl()
+        setupTableView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateCurrentSchedule()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scheduleFromUserDefaults = UserManager.instance.getScheduleFromUserDefaults()
+    }
+
+    // MARK: - Setups
+    private func setupView() {
+        view.backgroundColor = AppColor.shadowColor
+        view.addSubview(scheduleStackView)
+    }
+
+    private func setupNavigationController() {
+        title = "Schedule"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        let plusButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(plusButtonDidTapped))
+        plusButton.tintColor = AppColor.blackColor
+        navigationItem.setRightBarButton(plusButton, animated: true)
+    }
+
+    private func setupScheduleStuckView() {
+        scheduleStackView.axis = .vertical
+        scheduleStackView.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor,
+            leading: view.safeAreaLayoutGuide.leadingAnchor,
+            trailing: view.safeAreaLayoutGuide.trailingAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            padding: .init(top: 6, left: 8, bottom: 6, right: 8)
+        )
+        scheduleStackView.spacing = 6
+        scheduleStackView.addArrangedSubview(typesOfWeeksSegmentedControl)
+        scheduleStackView.addArrangedSubview(tableView)
+        scheduleStackView.addArrangedSubview(daysOfWeekSegmentedControl)
+    }
+
+    private func setupTypesOfWeekSegmentedControl() {
+        typesOfWeeksSegmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        typesOfWeeksSegmentedControl.addItems(items: [
+            "UPPER WEEK",
+            "BOTTOM WEEK"
+        ])
+        typesOfWeeksSegmentedControl.addTarget(
+            self,
+            action: #selector(valueChangedSegmentedControl),
+            for: .valueChanged
+        )
+    }
+
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = AppColor.shadowColor
+        tableView.rowHeight = 155
+        tableView.separatorStyle = .none
+        tableView.register(
+            ScheduleCell.self,
+            forCellReuseIdentifier: Schedule.Constants.scheduleCell
+        )
+    }
+
+    private func setupDaysOfWeekSegmentedControl() {
+        daysOfWeekSegmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        daysOfWeekSegmentedControl.addItems(items: [
             "Mon.",
             "Tues.",
             "Wed.",
@@ -55,102 +110,52 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
             "Fri.",
             "Sat."
         ])
-        itemedSegmentedControl.addTarget(
-            self,
-            action: #selector(handleSegmentControlChange),
-            for: .valueChanged
-        )
-        return itemedSegmentedControl
-    }()
-    lazy private var stackView = UIStackView(arrangedSubviews: [
-        tableView,
-        segmentedControl
-    ])
-
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        setupTableView()
-        setupNavigationController()
-        setupStuckView()
-        mondaySchedule = fetchMondaySchedule()
-        tuesdaySchedule = fetchTuesdaySchedule()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }
-
-    // MARK: - Setups
-    private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
-        view.addSubview(stackView)
-    }
-
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = AppColor.backgrounColor
-        tableView.rowHeight = 120
-        tableView.separatorStyle = .none
-        tableView.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            leading: view.leadingAnchor,
-            trailing: view.trailingAnchor,
-            bottom: segmentedControl.topAnchor,
-            padding: .init(top: 0, left: 12, bottom: 12, right: 12))
-        tableView.register(ScheduleCell.self, forCellReuseIdentifier: Schedule.Constants.scheduleCell)
-    }
-
-    private func setupNavigationController() {
-        title = "Schedule"
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-
-    private func setupStuckView() {
-        stackView.axis = .vertical
-        stackView.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            leading: view.leadingAnchor,
-            trailing: view.trailingAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            padding: .init(
-                top: 0,
-                left: 0,
-                bottom: 12,
-                right: 0
-            ),
-            size: .zero
-        )
+        daysOfWeekSegmentedControl.addTarget(self, action: #selector(valueChangedSegmentedControl), for: .valueChanged)
     }
 
     // MARK: - Actions
-    // MARK: Objc Methods
-    @objc func handleSegmentControlChange(_ segmentControl: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            rowsToDisplay = mondaySchedule
-        case 1:
-            rowsToDisplay = tuesdaySchedule
-        case 2:
-            rowsToDisplay = wednesdaySchedule
-        case 3:
-            rowsToDisplay = thursdaySchedule
-        case 4:
-            rowsToDisplay = fridaySchedule
-        case 5:
-            rowsToDisplay = saturdaySchedule
-        default:
-            print("can't display schedule.")
+    private func updateCurrentSchedule() {
+        let weekType = typesOfWeeksSegmentedControl.selectedSegmentIndex
+        let day = daysOfWeekSegmentedControl.selectedSegmentIndex
+
+        if weekType == 0 {
+            switch day {
+            case 0: type = .upper(.monday)
+            case 1: type = .upper(.tuesday)
+            case 2: type = .upper(.wednesday)
+            case 3: type = .upper(.thursday)
+            case 4: type = .upper(.friday)
+            case 5: type = .upper(.saturday)
+            default: print("choosed upper week type")
+            }
+        } else if weekType == 1 {
+            switch day {
+            case 0: type = .bottom(.monday)
+            case 1: type = .bottom(.tuesday)
+            case 2: type = .bottom(.wednesday)
+            case 3: type = .bottom(.thursday)
+            case 4: type = .bottom(.friday)
+            case 5: type = .bottom(.saturday)
+            default: print("choosed bottom week type")
+            }
         }
+
+        filteredSchedule = scheduleFromUserDefaults.filter { $0.scheduleDateType == type }
         tableView.reloadData()
     }
 
+    // MARK: Objc Methods
+    @objc private func plusButtonDidTapped() {
+        let screenForSaveScheduleViewController = ScreenForSaveScheduleViewController()
+        screenForSaveScheduleViewController.modalPresentationStyle = .fullScreen
+        present(screenForSaveScheduleViewController, animated: true, completion: nil)
+    }
+
+    @objc private func valueChangedSegmentedControl() {updateCurrentSchedule()}
+
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowsToDisplay.count
+        return filteredSchedule.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -160,74 +165,9 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         ) as? ScheduleCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
-        cell.configure(using: rowsToDisplay[indexPath.row])
+        cell.backgroundColor = AppColor.shadowColor
+        cell.configure(using: filteredSchedule[indexPath.row])
 
         return cell
-    }
-}
-
-extension ScheduleViewController {
-    func fetchMondaySchedule() -> [Schedule] {
-        let subject1 = Schedule.init(
-            nameSubject: "Math",
-            typeSubject: "Practice",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 402,
-            teacherName: "Koleda Maria")
-        let subject2 = Schedule.init(
-            nameSubject: "OOP",
-            typeSubject: "Lecture",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 404,
-            teacherName: "Voronov Sergei")
-        let subject3 = Schedule.init(
-            nameSubject: "Physical Culture",
-            typeSubject: "",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 102,
-            teacherName: "Francievna Elena")
-        let subject4 = Schedule.init(
-            nameSubject: "Physics",
-            typeSubject: "Laboratory",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 407,
-            teacherName: "Chugunov Sergei")
-        return [subject1, subject2, subject3, subject4]
-    }
-
-    func fetchTuesdaySchedule() -> [Schedule] {
-        let subject1 = Schedule.init(
-            nameSubject: "Modern Systems of Programming",
-            typeSubject: "Lecture",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 210,
-            teacherName: "Voicehovich Leonid")
-        let subject2 = Schedule.init(
-            nameSubject: "Modern Systems of Programming",
-            typeSubject: "Lecture",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 210,
-            teacherName: "Voicehovich Leonid")
-        let subject3 = Schedule.init(
-            nameSubject: "Intellectual Systems",
-            typeSubject: "Lecture",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 404,
-            teacherName: "Shutz V.N.")
-        let subject4 = Schedule.init(
-            nameSubject: "Modern Systems of Programming",
-            typeSubject: "Laboratory",
-            subjectStartTime: date,
-            subjectEndTime: date,
-            audienceNumber: 406,
-            teacherName: "Voicehovich Leonid")
-        return [subject1, subject2, subject3, subject4]
     }
 }

@@ -9,8 +9,8 @@ final class LoginViewController: UIViewController {
     private let mainStackView = UIStackView()
     private let typeOfUserLabel = CustomUILabel(text: "Login as:")
     private let typesOfUsersSegmentedControl = UISegmentedControl()
-    private let emailTextField = CustomTransparentUITextField(placeholderText: "Email")
-    private let passwordTextField = CustomTransparentUITextField(placeholderText: "Password")
+    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
+    private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
     private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: .black)
     private let passwordRecoveryButton = UIButton(type: .system)
 
@@ -26,7 +26,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
         view.addSubview(mainStackView)
     }
 

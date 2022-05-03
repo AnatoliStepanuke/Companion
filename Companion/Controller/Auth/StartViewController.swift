@@ -33,7 +33,7 @@ final class StartViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
         view.addSubview(companionLabel)
         view.addSubview(buttonsStackView)
     }

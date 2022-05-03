@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 enum AppColor {
-    static let barButtonColor: UIColor = UIColor(named: "barButtonColor") ?? .black
-    static let backgrounColor: UIColor = UIColor(named: "viewBackgroundColor") ?? .black
+    static let blackColor: UIColor = UIColor(named: "blackColor") ?? .black
+    static let shadowColor: UIColor = UIColor(named: "shadowColor") ?? .black
+    static let whiteColor: UIColor = UIColor(named: "whiteColor") ?? .black
+    static let fontColor: UIColor = UIColor(named: "fontColor") ?? .black
 }

@@ -10,7 +10,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-            UITabBar.appearance().tintColor = AppColor.barButtonColor
+            UITabBar.appearance().tintColor = AppColor.blackColor
             FirebaseApp.configure()
             return true
         }

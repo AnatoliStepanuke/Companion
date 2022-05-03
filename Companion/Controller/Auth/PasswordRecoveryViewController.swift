@@ -6,7 +6,7 @@ final class PasswordRecoveryViewController: UIViewController {
     // MARK: - Private
     private let mainStackView = UIStackView()
     private let passwordRecoveryLabel = CustomUILabel(text: "Enter email below to send link")
-    private let emailTextField = CustomTransparentUITextField(placeholderText: "Email")
+    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
     private let sendEmailButton = CustomRoundedUIButton(title: "Send", fontColor: .systemRed)
 
     // MARK: - Lifecycle
@@ -19,7 +19,7 @@ final class PasswordRecoveryViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
         view.addSubview(mainStackView)
     }
 

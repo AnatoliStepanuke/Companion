@@ -19,7 +19,7 @@ final class StudentProfileViewController: UIViewController {
 
     // MARK: - Setups
     private func setupView() {
-        view.backgroundColor = AppColor.backgrounColor
+        view.backgroundColor = AppColor.shadowColor
         view.addSubview(mainStackView)
     }
 
