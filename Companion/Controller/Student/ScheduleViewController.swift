@@ -113,6 +113,16 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         daysOfWeekSegmentedControl.addTarget(self, action: #selector(valueChangedSegmentedControl), for: .valueChanged)
     }
 
+    // MARK: - Helpers
+    private func openScreenForSaveSubjectViewController() {
+        let screenForSaveScheduleViewController = ScreenForSaveSubjectViewController()
+        present(
+            NavigationStackManager.instance.modalPresentFullScreenViewController(
+                viewController: screenForSaveScheduleViewController
+            ), animated: true, completion: nil
+        )
+    }
+
     // MARK: - Actions
     private func updateCurrentSchedule() {
         let weekType = typesOfWeeksSegmentedControl.selectedSegmentIndex
@@ -146,9 +156,7 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
 
     // MARK: Objc Methods
     @objc private func plusButtonDidTapped() {
-        let screenForSaveScheduleViewController = ScreenForSaveScheduleViewController()
-        screenForSaveScheduleViewController.modalPresentationStyle = .fullScreen
-        present(screenForSaveScheduleViewController, animated: true, completion: nil)
+        openScreenForSaveSubjectViewController()
     }
 
     @objc private func valueChangedSegmentedControl() {updateCurrentSchedule()}

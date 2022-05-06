@@ -7,8 +7,8 @@ final class SignupViewController: UIViewController {
     // MARK: - Private
     private let defaults = UserDefaults.standard
     private let mainStackView = UIStackView()
-    private let databaseReferenceToStudents = Database.database().reference().child("students")
-    private let databaseReferenceToTeachers = Database.database().reference().child("teachers")
+    private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
+    private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let nameTextField = CustomAuthtUITextField(placeholderText: "Name")
     private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
     private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")

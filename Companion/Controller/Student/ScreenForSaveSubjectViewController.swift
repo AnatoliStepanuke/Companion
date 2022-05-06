@@ -1,6 +1,6 @@
 import UIKit
 
-final class ScreenForSaveScheduleViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+final class ScreenForSaveSubjectViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     // MARK: - Constants
     // MARK: - Private
     private let typesSubjects: [String] = ["No type subject", "Lecture", "Practice", "Lab", "Other"]

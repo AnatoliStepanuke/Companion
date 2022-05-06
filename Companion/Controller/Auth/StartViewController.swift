@@ -8,9 +8,9 @@ final class StartViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private let companionLabel = UILabel()
     private let buttonsStackView = UIStackView()
-    private let databaseReference = Database.database().reference()
-    private let databaseReferenceToStudents = Database.database().reference().child("students")
-    private let databaseReferenceToTeachers = Database.database().reference().child("teachers")
+    private let databaseReference = FirebaseManager.instance.databaseReference
+    private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
+    private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: .black)
     private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: .black)
 

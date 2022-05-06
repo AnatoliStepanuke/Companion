@@ -101,24 +101,23 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="jWT-xM-EE6" kind="relationship" relationship="viewControllers" id="yci-lG-FDY"/>
-                        <segue destination="2Z6-rs-aZd" kind="relationship" relationship="viewControllers" id="1q1-lh-J19"/>
+                        <segue destination="jWT-xM-EE6" kind="relationship" relationship="viewControllers" id="qOD-PF-D0m"/>
+                        <segue destination="2Z6-rs-aZd" kind="relationship" relationship="viewControllers" id="vLP-Fo-rYi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJF-Ep-zJa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1841" y="-559"/>
         </scene>
-        <!--Students View Controller-->
+        <!--Messenger Table View Controller-->
         <scene sceneID="gKp-Wy-kUq">
             <objects>
-                <viewController id="gKc-lD-JCs" customClass="StudentsViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MN9-L0-LGY">
+                <viewController id="gKc-lD-JCs" customClass="MessengerTableViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="WyH-2e-qZp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="3xw-ho-Qb2"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
+                    </tableView>
                     <navigationItem key="navigationItem" id="g4G-QI-1e1"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gm9-h0-KKx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -198,11 +197,11 @@
             </objects>
             <point key="canvasLocation" x="-70" y="247"/>
         </scene>
-        <!--Students-->
+        <!--Messenger-->
         <scene sceneID="1gI-q3-FOy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jWT-xM-EE6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Students" image="person.3" catalog="system" id="FHS-1j-1t2"/>
+                    <tabBarItem key="tabBarItem" title="Messenger" image="message" catalog="system" id="FHS-1j-1t2"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="CxQ-EA-A1Y"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ns6-ec-eb1">
@@ -259,7 +258,7 @@
     <resources>
         <image name="brain.head.profile" catalog="system" width="114" height="128"/>
         <image name="house" catalog="system" width="128" height="106"/>
-        <image name="person.3" catalog="system" width="128" height="62"/>
+        <image name="message" catalog="system" width="128" height="113"/>
         <image name="table" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
