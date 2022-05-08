@@ -11,5 +11,4 @@ final class FirebaseManager {
 
     // MARK: - Init
     private init() { }
-
 }

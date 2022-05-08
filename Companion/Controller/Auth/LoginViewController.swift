@@ -52,8 +52,10 @@ final class LoginViewController: UIViewController {
     }
 
     private func setupTypesOfUsersSegmentedControl() {
-        typesOfUsersSegmentedControl.insertSegment(withTitle: "Student", at: 0, animated: true)
-        typesOfUsersSegmentedControl.insertSegment(withTitle: "Teacher", at: 1, animated: true)
+        typesOfUsersSegmentedControl.addItems(items: [
+            "Student",
+            "Teacher"
+        ])
         typesOfUsersSegmentedControl.selectedSegmentIndex = 0
     }
 

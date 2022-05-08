@@ -37,7 +37,7 @@ final class UserCell: UITableViewCell {
                 right: 0
             )
         )
-        containerStackView.backgroundColor = AppColor.whiteColor
+        containerStackView.backgroundColor = AppColor.shadowColor
         containerStackView.addArrangedSubview(initialsStackView)
     }
 

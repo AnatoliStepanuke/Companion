@@ -159,7 +159,7 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         openScreenForSaveSubjectViewController()
     }
 
-    @objc private func valueChangedSegmentedControl() {updateCurrentSchedule()}
+    @objc private func valueChangedSegmentedControl() { updateCurrentSchedule() }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -173,7 +173,6 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         ) as? ScheduleCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
-        cell.backgroundColor = AppColor.shadowColor
         cell.configure(using: filteredSchedule[indexPath.row])
 
         return cell

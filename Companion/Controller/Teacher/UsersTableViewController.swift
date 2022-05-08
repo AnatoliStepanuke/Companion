@@ -1,15 +1,18 @@
 import UIKit
+import Firebase
 
 final class UsersTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Constants
     // MARK: Private
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
-    private let navigationStackView = UIStackView()
-    private let mainStackView = UIStackView()
+    private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
+    private let tableView = UITableView(frame: .zero, style: .plain)
+    private let typesOfUsersSegmentedControl = UISegmentedControl()
     private let dismissButton = UIButton(type: .system)
     private let fetchButton = UIButton(type: .system)
+    private let navigationStackView = UIStackView()
+    private let mainStackView = UIStackView()
     private let pageTitle = UILabel()
-    private let tableView = UITableView(frame: .zero, style: .plain)
 
     // MARK: - Properties
     // MARK: Private
@@ -24,11 +27,12 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         setupPageTitle()
         setupFetchButton()
         setupMainStackView()
+        setupTypesOfUsersSegmentedControl()
         setupTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        fetchTeacherUsers()
+        showAllUsers()
     }
 
     // MARK: - Setups
@@ -48,7 +52,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
             bottom: mainStackView.topAnchor,
             padding: .init(top: 12, left: 0, bottom: 8, right: 0)
         )
-       navigationStackView.heightAnchor.constraint(
+        navigationStackView.heightAnchor.constraint(
             equalTo: mainStackView.heightAnchor,
             multiplier: 0.1
         ).isActive = true
@@ -65,7 +69,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     private func setupPageTitle() {
-        pageTitle.text = "Users"
+        pageTitle.text = "Contacts"
         pageTitle.textAlignment = .center
         pageTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
@@ -77,14 +81,29 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
 
     // MARK: MainStackView
     private func setupMainStackView() {
+        mainStackView.axis = .vertical
         mainStackView.anchor(
             top: navigationStackView.bottomAnchor,
             leading: view.safeAreaLayoutGuide.leadingAnchor,
             trailing: view.safeAreaLayoutGuide.trailingAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            padding: .init(top: 8, left: 0, bottom: 8, right: 0)
+            padding: .init(top: 8, left: 12, bottom: 8, right: 12)
         )
+        mainStackView.addArrangedSubview(typesOfUsersSegmentedControl)
         mainStackView.addArrangedSubview(tableView)
+    }
+
+    private func setupTypesOfUsersSegmentedControl() {
+        typesOfUsersSegmentedControl.addItems(items: [
+            "Teachers",
+            "Students"
+        ])
+        typesOfUsersSegmentedControl.selectedSegmentIndex = 0
+        typesOfUsersSegmentedControl.addTarget(
+            self,
+            action: #selector(valueChangedTypesOfUsersSegmentedControl),
+            for: .valueChanged
+        )
     }
 
     private func setupTableView() {
@@ -99,10 +118,11 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     // MARK: - Helpers
+    // Firebase
     private func fetchTeacherUsers() {
+        users.removeAll()
         databaseReferenceToTeachers.observe(.childAdded, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                print(dictionary)
                 let user = User(dictionary: dictionary)
                 self.users.append(user)
                 DispatchQueue.main.async(execute: {
@@ -110,6 +130,27 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
                 })
             }
         })
+    }
+
+    private func fetchStudentUsers() {
+        users.removeAll()
+        databaseReferenceToStudents.observe(.childAdded, with: { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let user = User(dictionary: dictionary)
+                self.users.append(user)
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
+            }
+        })
+    }
+
+    private func showAllUsers() {
+        switch typesOfUsersSegmentedControl.selectedSegmentIndex {
+        case 0: fetchTeacherUsers()
+        case 1: fetchStudentUsers()
+        default: print("Contacts: Something going bad wrong")
+        }
     }
 
     // MARK: - Table view data source
@@ -124,7 +165,6 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         ) as? UserCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
-        cell.backgroundColor = AppColor.shadowColor
         cell.configure(using: users[indexPath.row])
 
         return cell
@@ -132,11 +172,9 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
 
     // MARK: - Actions
     // MARK: Objc Methods
-    @objc func dismissButtonDidTapped() {
-        dismiss(animated: true, completion: nil)
-    }
+    @objc func dismissButtonDidTapped() { dismiss(animated: true, completion: nil) }
 
-    @objc func fetchButtonDidTapped() {
-        tableView.reloadData()
-    }
+    @objc func fetchButtonDidTapped() { fetchStudentUsers() }
+
+    @objc private func valueChangedTypesOfUsersSegmentedControl() { showAllUsers() }
 }
