@@ -18,6 +18,7 @@
 		DC15FF7B280A049800F2D10B /* TeacherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15FF7A280A049800F2D10B /* TeacherProfileViewController.swift */; };
 		DC1826582808392D00A6A9CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC1826572808392D00A6A9CF /* GoogleService-Info.plist */; };
 		DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */; };
+		DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */; };
 		DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */; };
 		DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */; };
 		DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677428215CB000481FE8 /* CustomUITextField.swift */; };
@@ -64,6 +65,7 @@
 		DC15FF7A280A049800F2D10B /* TeacherProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfileViewController.swift; sourceTree = "<group>"; };
 		DC1826572808392D00A6A9CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationStack+Manager.swift"; sourceTree = "<group>"; };
+		DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageView.swift; sourceTree = "<group>"; };
 		DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		DC6F677428215CB000481FE8 /* CustomUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITextField.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */,
 				DC01931C281AD3BA00A799C0 /* CustomRoundedUIButton.swift */,
 				DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */,
+				DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */,
 				DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */,
 				DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */,
+				DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */,
 				DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */,
 				DC7E040027A98A1D00E036AE /* AppDelegate.swift in Sources */,
 				DC0193172819800900A799C0 /* Alert+Manager.swift in Sources */,

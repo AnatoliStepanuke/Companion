@@ -11,7 +11,7 @@ final class LoginViewController: UIViewController {
     private let typesOfUsersSegmentedControl = UISegmentedControl()
     private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
     private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
-    private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: .black)
+    private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: AppColor.whiteColor)
     private let passwordRecoveryButton = UIButton(type: .system)
 
     // MARK: - Lifecycle
