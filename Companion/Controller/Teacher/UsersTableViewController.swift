@@ -165,6 +165,8 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         ) as? UserCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
+        cell.selectionStyle = .none
+        cell.backgroundColor = AppColor.shadowColor
         cell.configure(using: users[indexPath.row])
 
         return cell

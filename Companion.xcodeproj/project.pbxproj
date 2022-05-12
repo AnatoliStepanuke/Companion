@@ -19,6 +19,7 @@
 		DC1826582808392D00A6A9CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC1826572808392D00A6A9CF /* GoogleService-Info.plist */; };
 		DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */; };
 		DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */; };
+		DC49405C282C4CCB00448ACC /* UIIImageView+loadImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */; };
 		DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */; };
 		DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */; };
 		DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677428215CB000481FE8 /* CustomUITextField.swift */; };
@@ -66,6 +67,7 @@
 		DC1826572808392D00A6A9CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationStack+Manager.swift"; sourceTree = "<group>"; };
 		DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageView.swift; sourceTree = "<group>"; };
+		DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIIImageView+loadImages.swift"; sourceTree = "<group>"; };
 		DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		DC6F677428215CB000481FE8 /* CustomUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITextField.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				DC0AF03827BEC91B0006830F /* Schedule+constants.swift */,
 				DC97645B281D4D620088F271 /* UserDefaults+keys.swift */,
 				DCDA64342825BC400002C09D /* User+constants.swift */,
+				DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				DC0AF02F27BAD3EF0006830F /* ScheduleCell.swift in Sources */,
 				DC92520127AE84DC00CC200B /* Color.swift in Sources */,
 				DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */,
+				DC49405C282C4CCB00448ACC /* UIIImageView+loadImages.swift in Sources */,
 				DCDA642B2825464F0002C09D /* UsersTableViewController.swift in Sources */,
 				DC6F67852821653900481FE8 /* Schedule.swift in Sources */,
 				DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */,

@@ -150,12 +150,12 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
         databaseReference.child(userID).updateChildValues([
             "name": name,
             "email": email,
-            "userProfileImage": absoluteStringURL
+            "profileImageURL": absoluteStringURL
         ])
     }
 
     private func saveUserToStorageAndDatabase(name: String, email: String, userID: String, databaseReference: DatabaseReference, storageReference: StorageReference) {
-        if let profileImage = self.profileImageView.image,
+        if let profileImage = profileImageView.image,
            let uploadData = profileImage.jpegData(compressionQuality: 0.1) {
             storageReference.putData(uploadData, metadata: nil) { _, error in
                 if error == nil {
