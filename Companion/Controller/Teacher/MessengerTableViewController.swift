@@ -68,7 +68,7 @@ final class MessengerTableViewController: UITableViewController {
                 self.openAuthViewController()
             } else {
                 if let user = user {
-                    self.displayUserName(userID: user.uid)
+                    self.displayUserNameNavigationController(userID: user.uid)
                 }
             }
         }
@@ -81,7 +81,7 @@ final class MessengerTableViewController: UITableViewController {
         Auth.auth().removeStateDidChangeListener(handle)
     }
 
-    private func displayUserName(userID: String) {
+    private func displayUserNameNavigationController(userID: String) {
         self.databaseReferenceToTeachers.child(userID).observeSingleEvent(of: .value) { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 if let userName = dictionary["name"] as? String {

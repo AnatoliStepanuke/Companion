@@ -6,10 +6,10 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     // MARK: Private
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
+    private let profileImageView = CustomProfileIconUIImageView(systemName: "person")
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let typesOfUsersSegmentedControl = UISegmentedControl()
     private let dismissButton = UIButton(type: .system)
-    private let fetchButton = UIButton(type: .system)
     private let navigationStackView = UIStackView()
     private let mainStackView = UIStackView()
     private let pageTitle = UILabel()
@@ -25,7 +25,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         setupNavigationStackView()
         setupDismissButton()
         setupPageTitle()
-        setupFetchButton()
+        setupProfileImageView()
         setupMainStackView()
         setupTypesOfUsersSegmentedControl()
         setupTableView()
@@ -50,7 +50,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
             leading: view.safeAreaLayoutGuide.leadingAnchor,
             trailing: view.safeAreaLayoutGuide.trailingAnchor,
             bottom: mainStackView.topAnchor,
-            padding: .init(top: 12, left: 0, bottom: 8, right: 0)
+            padding: .init(top: 4, left: 24, bottom: 4, right: 24)
         )
         navigationStackView.heightAnchor.constraint(
             equalTo: mainStackView.heightAnchor,
@@ -58,9 +58,9 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         ).isActive = true
         navigationStackView.addArrangedSubview(dismissButton)
         navigationStackView.addArrangedSubview(pageTitle)
-        navigationStackView.addArrangedSubview(fetchButton)
+        navigationStackView.addArrangedSubview(profileImageView)
         navigationStackView.alignment = .center
-        navigationStackView.distribution = .fillEqually
+        navigationStackView.distribution = .equalCentering
     }
 
     private func setupDismissButton() {
@@ -74,9 +74,14 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
         pageTitle.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
 
-    private func setupFetchButton() {
-        fetchButton.setTitle("Fetch", for: .normal)
-        fetchButton.addTarget(self, action: #selector(fetchButtonDidTapped), for: .touchUpInside)
+    private func setupProfileImageView() {
+        loadProfileImageView()
+        profileImageView.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(profileImageViewDidTapped)
+            )
+        )
     }
 
     // MARK: MainStackView
@@ -87,7 +92,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
             leading: view.safeAreaLayoutGuide.leadingAnchor,
             trailing: view.safeAreaLayoutGuide.trailingAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            padding: .init(top: 8, left: 12, bottom: 8, right: 12)
+            padding: .init(top: 4, left: 12, bottom: 8, right: 12)
         )
         mainStackView.addArrangedSubview(typesOfUsersSegmentedControl)
         mainStackView.addArrangedSubview(tableView)
@@ -118,6 +123,24 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     // MARK: - Helpers
+    private func loadProfileImageView() {
+        if let userID = Auth.auth().currentUser?.uid {
+            databaseReferenceToTeachers.child(userID).observeSingleEvent(of: .value) { snapshot in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let user = User(dictionary: dictionary)
+                    if let userIconURL = user.profileImageURL {
+                        self.profileImageView.loadImageUsingCache(userIconURL)
+                    }
+                }
+            }
+        }
+    }
+
+    private func openTeacherProfileViewController() {
+        let teacherProfileViewController = TeacherProfileViewController()
+        present(teacherProfileViewController, animated: true)
+    }
+
     // Firebase
     private func fetchTeacherUsers() {
         users.removeAll()
@@ -176,7 +199,9 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     // MARK: Objc Methods
     @objc func dismissButtonDidTapped() { dismiss(animated: true, completion: nil) }
 
-    @objc func fetchButtonDidTapped() { fetchStudentUsers() }
+    @objc func profileImageViewDidTapped() {
+        openTeacherProfileViewController()
+    }
 
     @objc private func valueChangedTypesOfUsersSegmentedControl() { showAllUsers() }
 }
