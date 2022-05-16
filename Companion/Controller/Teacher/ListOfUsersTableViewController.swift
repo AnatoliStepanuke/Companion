@@ -1,7 +1,7 @@
 import UIKit
 import Firebase
 
-final class UsersTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class ListOfUsersTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Constants
     // MARK: Private
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
@@ -9,7 +9,7 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     private let profileImageView = CustomProfileIconUIImageView(systemName: "person")
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let typesOfUsersSegmentedControl = UISegmentedControl()
-    private let dismissButton = UIButton(type: .system)
+    private let dismissButton = CustomPlainUIButton(systemName: "chevron.backward")
     private let navigationStackView = UIStackView()
     private let mainStackView = UIStackView()
     private let pageTitle = UILabel()
@@ -64,7 +64,6 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     private func setupDismissButton() {
-        dismissButton.setTitle("Back", for: .normal)
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTapped), for: .touchUpInside)
     }
 
@@ -100,8 +99,8 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
 
     private func setupTypesOfUsersSegmentedControl() {
         typesOfUsersSegmentedControl.addItems(items: [
-            "Teachers",
-            "Students"
+            "Students",
+            "Teachers"
         ])
         typesOfUsersSegmentedControl.selectedSegmentIndex = 0
         typesOfUsersSegmentedControl.addTarget(
@@ -170,8 +169,8 @@ final class UsersTableViewController: UIViewController, UITableViewDataSource, U
 
     private func showAllUsers() {
         switch typesOfUsersSegmentedControl.selectedSegmentIndex {
-        case 0: fetchTeacherUsers()
-        case 1: fetchStudentUsers()
+        case 0: fetchStudentUsers()
+        case 1: fetchTeacherUsers()
         default: print("Contacts: Something going bad wrong")
         }
     }

@@ -6,7 +6,9 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: - Constants
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let personsImage = UIImage(systemName: "person.badge.plus")
+    private let messageImage = UIImage(systemName: "message")
     private let usersBarButton = UIBarButtonItem()
+    private let messageBarButton = UIBarButtonItem()
 
     // MARK: - Properties
     private var handleAuthDidChangeListener: AuthStateDidChangeListenerHandle?
@@ -17,6 +19,7 @@ final class MessengerTableViewController: UITableViewController {
         setupView()
         setupNavigationController()
         setupUsersBarButton()
+        setupMessageBarButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +38,7 @@ final class MessengerTableViewController: UITableViewController {
     private func setupNavigationController() {
         title = "Messenger"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.setRightBarButton(usersBarButton, animated: true)
+        navigationItem.setRightBarButtonItems([usersBarButton, messageBarButton], animated: true)
     }
 
     private func setupUsersBarButton() {
@@ -43,6 +46,13 @@ final class MessengerTableViewController: UITableViewController {
         usersBarButton.tintColor = AppColor.blackColor
         usersBarButton.target = self
         usersBarButton.action = #selector(usersButtonDidTapped)
+    }
+
+    private func setupMessageBarButton() {
+        messageBarButton.image = messageImage
+        messageBarButton.tintColor = AppColor.blackColor
+        messageBarButton.target = self
+        messageBarButton.action = #selector(messageButtonDidTapped)
     }
 
     // MARK: - Helpers
@@ -53,12 +63,19 @@ final class MessengerTableViewController: UITableViewController {
     }
 
     private func openUsersTableViewController() {
-        let usersTableViewController = UsersTableViewController()
+        let usersTableViewController = ListOfUsersTableViewController()
         present(
             NavigationStackManager.instance.modalPresentFullScreenViewController(
                 viewController: usersTableViewController
             ), animated: true, completion: nil
         )
+    }
+
+    private func openChatCollectionViewController() {
+        let chatCollectionViewController = ChatCollectionViewController(
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
+        present(chatCollectionViewController, animated: true)
     }
 
     // Firebase
@@ -104,5 +121,9 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: Objc Methods
     @objc private func usersButtonDidTapped() {
         openUsersTableViewController()
+    }
+
+    @objc private func messageButtonDidTapped() {
+        openChatCollectionViewController()
     }
 }
