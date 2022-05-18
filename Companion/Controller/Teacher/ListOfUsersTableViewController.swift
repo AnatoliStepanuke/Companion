@@ -140,12 +140,31 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
         present(teacherProfileViewController, animated: true)
     }
 
+    private func openChatCollectionViewController(indexPath: IndexPath) {
+        let pvc = self.presentingViewController
+        let chatCollectionViewController = ChatCollectionViewController(
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
+
+        dismiss(animated: true, completion: {
+            pvc?.present(
+                NavigationStackManager.instance.presentCollectionViewController(
+                    collectionVC: chatCollectionViewController
+                ), animated: true, completion: {
+                    let user = self.users[indexPath.row]
+                    chatCollectionViewController.user = user
+                }
+            )
+        })
+    }
+
     // Firebase
     private func fetchTeacherUsers() {
         users.removeAll()
         databaseReferenceToTeachers.observe(.childAdded, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let user = User(dictionary: dictionary)
+                var user = User(dictionary: dictionary)
+                user.id = snapshot.key
                 self.users.append(user)
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
@@ -158,7 +177,8 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
         users.removeAll()
         databaseReferenceToStudents.observe(.childAdded, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let user = User(dictionary: dictionary)
+                var user = User(dictionary: dictionary)
+                user.id = snapshot.key
                 self.users.append(user)
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
@@ -194,13 +214,15 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        openChatCollectionViewController(indexPath: indexPath)
+    }
+
     // MARK: - Actions
     // MARK: Objc Methods
     @objc func dismissButtonDidTapped() { dismiss(animated: true, completion: nil) }
 
-    @objc func profileImageViewDidTapped() {
-        openTeacherProfileViewController()
-    }
+    @objc func profileImageViewDidTapped() { openTeacherProfileViewController() }
 
     @objc private func valueChangedTypesOfUsersSegmentedControl() { showAllUsers() }
 }

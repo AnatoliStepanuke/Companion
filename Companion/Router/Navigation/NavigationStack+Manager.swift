@@ -46,4 +46,8 @@ final class NavigationStackManager {
 
         return viewController
     }
+
+    func presentCollectionViewController(collectionVC: UICollectionViewController) -> UICollectionViewController {
+        return collectionVC
+    }
 }
