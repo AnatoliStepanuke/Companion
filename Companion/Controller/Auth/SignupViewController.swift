@@ -28,7 +28,7 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
     private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
 
     // UIButton
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.whiteColor)
+    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
 
     // MARK: - Properties
     // MARK: - Private

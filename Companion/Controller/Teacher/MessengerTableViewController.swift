@@ -135,4 +135,9 @@ final class MessengerTableViewController: UITableViewController {
     @objc private func usersButtonDidTapped() {
         openUsersTableViewController()
     }
+
+    // MARK: - Touch responders
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }

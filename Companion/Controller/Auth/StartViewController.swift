@@ -11,8 +11,8 @@ final class StartViewController: UIViewController {
     private let databaseReference = FirebaseManager.instance.databaseReference
     private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
-    private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: AppColor.whiteColor)
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.whiteColor)
+    private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: AppColor.blackColor)
+    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
 
     // MARK: - Properties
     private var handleAuthDidChangeListener: AuthStateDidChangeListenerHandle?
