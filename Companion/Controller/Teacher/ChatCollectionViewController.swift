@@ -8,7 +8,7 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let chatInputStackView = UIStackView()
     private let initialsStackView = UIStackView()
-    private let sendButton = CustomPlainUIButton(systemName: "paperplane")
+    private let sendButton = CustomPlainUIButton(systemName: "paperplane", title: nil)
     private let inputTextField = UITextField()
     private let companionLabel = UILabel()
 

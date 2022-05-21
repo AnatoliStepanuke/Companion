@@ -45,10 +45,10 @@
 		DC96F3E12833AC4100774F49 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DC96F3E02833AC4100774F49 /* FirebaseDatabase */; };
 		DC96F3E32833AC4100774F49 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DC96F3E22833AC4100774F49 /* FirebaseStorage */; };
 		DC96F3E52835175100774F49 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E42835175100774F49 /* Message.swift */; };
-		DC96F3E72835224000774F49 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E62835224000774F49 /* MessageCell.swift */; };
+		DC96F3E72835224000774F49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E62835224000774F49 /* ChatCell.swift */; };
 		DC96F3E9283524B600774F49 /* Message+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E8283524B600774F49 /* Message+constants.swift */; };
 		DC97645C281D4D620088F271 /* UserDefaults+keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC97645B281D4D620088F271 /* UserDefaults+keys.swift */; };
-		DC9F9D7F282E682200D48201 /* CustomProfileIconUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D7E282E682200D48201 /* CustomProfileIconUIImageView.swift */; };
+		DC9F9D7F282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D7E282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift */; };
 		DC9F9D81282EAA5500D48201 /* ChatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */; };
 		DC9F9D83283286D300D48201 /* CustomPlainUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */; };
 		DCB2046427B442AB00B26AAB /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2046327B442AB00B26AAB /* UIView+Layout.swift */; };
@@ -99,10 +99,10 @@
 		DC92520227AE98C000CC200B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		DC96F3E42835175100774F49 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		DC96F3E62835224000774F49 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		DC96F3E62835224000774F49 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		DC96F3E8283524B600774F49 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
 		DC97645B281D4D620088F271 /* UserDefaults+keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+keys.swift"; sourceTree = "<group>"; };
-		DC9F9D7E282E682200D48201 /* CustomProfileIconUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileIconUIImageView.swift; sourceTree = "<group>"; };
+		DC9F9D7E282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageViewWithConfig.swift; sourceTree = "<group>"; };
 		DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewController.swift; sourceTree = "<group>"; };
 		DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlainUIButton.swift; sourceTree = "<group>"; };
 		DCB2046327B442AB00B26AAB /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			children = (
 				DC0AF02E27BAD3EF0006830F /* ScheduleCell.swift */,
 				DCDA64322825B9370002C09D /* UserCell.swift */,
-				DC96F3E62835224000774F49 /* MessageCell.swift */,
+				DC96F3E62835224000774F49 /* ChatCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 		DC9F9D872832895800D48201 /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
-				DC9F9D7E282E682200D48201 /* CustomProfileIconUIImageView.swift */,
+				DC9F9D7E282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift */,
 				DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */,
 			);
 			path = UIImageView;
@@ -496,7 +496,7 @@
 				DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */,
 				DCDA64332825B9370002C09D /* UserCell.swift in Sources */,
 				DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */,
-				DC9F9D7F282E682200D48201 /* CustomProfileIconUIImageView.swift in Sources */,
+				DC9F9D7F282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift in Sources */,
 				DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */,
 				DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */,
 				DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */,
@@ -523,7 +523,7 @@
 				DC6F67852821653900481FE8 /* Schedule.swift in Sources */,
 				DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */,
 				DC97645C281D4D620088F271 /* UserDefaults+keys.swift in Sources */,
-				DC96F3E72835224000774F49 /* MessageCell.swift in Sources */,
+				DC96F3E72835224000774F49 /* ChatCell.swift in Sources */,
 				DCDA64352825BC400002C09D /* User+constants.swift in Sources */,
 				DC02F3632804A83900A336DC /* SignupViewController.swift in Sources */,
 				DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */,

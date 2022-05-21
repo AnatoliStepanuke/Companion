@@ -19,7 +19,14 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
     private let storageReferenceToTeachersImages = FirebaseManager.instance.storageReferenceToTeachersImages
 
     // UIImage
-    private let profileImageView = CustomProfileUIImageView(systemName: "person.crop.circle.badge.plus")
+    private let profileImageView = CustomProfileUIImageViewWithConfig(
+        systemName: "person.crop.circle.badge.plus",
+        height: 125,
+        width: 125,
+        pointSize: 100,
+        weight: .ultraLight,
+        scale: .medium
+    )
     private let pickerController = UIImagePickerController()
 
     // UITextFields

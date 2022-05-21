@@ -6,10 +6,17 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
     // MARK: Private
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
-    private let profileImageView = CustomProfileIconUIImageView(systemName: "person")
+    private let profileImageView = CustomProfileUIImageViewWithConfig(
+        systemName: "person",
+        height: 35,
+        width: 35,
+        pointSize: 5,
+        weight: .ultraLight,
+        scale: .medium
+    )
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let typesOfUsersSegmentedControl = UISegmentedControl()
-    private let dismissButton = CustomPlainUIButton(systemName: "chevron.backward")
+    private let dismissButton = CustomPlainUIButton(systemName: nil, title: "Back")
     private let navigationStackView = UIStackView()
     private let mainStackView = UIStackView()
     private let pageTitle = UILabel()
@@ -122,19 +129,6 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
     }
 
     // MARK: - Helpers
-    private func loadProfileImageView() {
-        if let userID = Auth.auth().currentUser?.uid {
-            databaseReferenceToTeachers.child(userID).observeSingleEvent(of: .value) { snapshot in
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let user = User(dictionary: dictionary)
-                    if let userIconURL = user.profileImageURL {
-                        self.profileImageView.loadImageUsingCache(userIconURL)
-                    }
-                }
-            }
-        }
-    }
-
     private func openTeacherProfileViewController() {
         let teacherProfileViewController = TeacherProfileViewController()
         present(teacherProfileViewController, animated: true)
@@ -193,6 +187,18 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
         case 1: fetchTeacherUsers()
         default: print("Contacts: Something going bad wrong")
         }
+    }
+
+    private func loadProfileImageView() {
+        FirebaseManager.instance.fetchProfileImageView(
+            imageView: profileImageView,
+            databaseRef: databaseReferenceToTeachers
+        )
+
+        FirebaseManager.instance.fetchProfileImageView(
+            imageView: profileImageView,
+            databaseRef: databaseReferenceToStudents
+        )
     }
 
     // MARK: - Table view data source

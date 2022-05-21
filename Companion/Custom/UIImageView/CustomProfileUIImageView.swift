@@ -1,14 +1,9 @@
 import UIKit
 
 final class CustomProfileUIImageView: UIImageView {
-    // MARK: - Constants
-    // MARK: - Private
-    private let imageConfig = UIImage.SymbolConfiguration(pointSize: 100, weight: .ultraLight, scale: .medium)
-
     // MARK: - Init
     init(systemName: String) {
         super.init(frame: .zero)
-        setupConstraints()
         setupImage(systemName: systemName)
         setupRound()
     }
@@ -18,14 +13,8 @@ final class CustomProfileUIImageView: UIImageView {
     }
 
     // MARK: - Setups
-    private func setupConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
-        widthAnchor.constraint(equalToConstant: 125).isActive = true
-        heightAnchor.constraint(equalToConstant: 125).isActive = true
-    }
-
     private func setupImage(systemName: String) {
-        image = UIImage(systemName: systemName, withConfiguration: imageConfig)
+        image = UIImage(systemName: systemName)
         tintColor = AppColor.blackColor
         contentMode = .scaleAspectFill
         isUserInteractionEnabled = true

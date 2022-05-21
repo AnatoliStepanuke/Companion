@@ -1,4 +1,5 @@
-import Foundation
+import UIKit
+import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 
@@ -16,4 +17,26 @@ final class FirebaseManager {
 
     // MARK: - Init
     private init() { }
+
+    // MARK: - API
+    func fetchUserNameToUILabel(dictionaryKey: String, toUserID: String, label: UILabel, databaseRef: DatabaseReference) {
+        databaseRef.child(toUserID).observe(.value, with: { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                label.text = dictionary[dictionaryKey] as? String
+            }
+        }, withCancel: nil)
+    }
+
+    func fetchProfileImageView(imageView: UIImageView, databaseRef: DatabaseReference) {
+        if let userID = Auth.auth().currentUser?.uid {
+            databaseRef.child(userID).observeSingleEvent(of: .value) { snapshot in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let user = User(dictionary: dictionary)
+                    if let userIconURL = user.profileImageURL {
+                        imageView.loadImageUsingCache(userIconURL)
+                    }
+                }
+            }
+        }
+    }
 }

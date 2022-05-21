@@ -17,14 +17,14 @@ final class MessengerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupTableView()
         setupNavigationController()
         setupUsersBarButton()
+        setupTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         handleAuthListener()
-        observeMessages()
+        fetchMessages()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -34,14 +34,6 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: - Setups
     private func setupView() {
         view.backgroundColor = AppColor.shadowColor
-    }
-
-    private func setupTableView() {
-        tableView.rowHeight = 80
-        tableView.register(
-            MessageCell.self,
-            forCellReuseIdentifier: Message.Constants.messageCell
-        )
     }
 
     private func setupNavigationController() {
@@ -57,18 +49,15 @@ final class MessengerTableViewController: UITableViewController {
         usersBarButton.action = #selector(usersButtonDidTapped)
     }
 
+    private func setupTableView() {
+        tableView.rowHeight = 80
+        tableView.register(
+            ChatCell.self,
+            forCellReuseIdentifier: Message.Constants.messageCell
+        )
+    }
+
     // MARK: - Helpers
-    private func openAuthViewController() {
-        let startViewController = StartViewController()
-        view.window?.rootViewController = startViewController
-        view.window?.makeKeyAndVisible()
-    }
-
-    private func openUsersTableViewController() {
-        let listOfUsersTableViewController = ListOfUsersTableViewController()
-        present(listOfUsersTableViewController, animated: true)
-    }
-
     // Firebase
     private func handleAuthListener() {
         handleAuthDidChangeListener = Auth.auth().addStateDidChangeListener { _, user in
@@ -99,7 +88,7 @@ final class MessengerTableViewController: UITableViewController {
         }
     }
 
-    private func observeMessages() {
+    private func fetchMessages() {
         databaseReferenceToMessages.observe(.childAdded, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Message(dictionary: dictionary)
@@ -120,7 +109,7 @@ final class MessengerTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Message.Constants.messageCell,
             for: indexPath
-        ) as? MessageCell else {
+        ) as? ChatCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
         cell.selectionStyle = .none
@@ -131,6 +120,17 @@ final class MessengerTableViewController: UITableViewController {
     }
 
     // MARK: - Actions
+    private func openAuthViewController() {
+        let startViewController = StartViewController()
+        view.window?.rootViewController = startViewController
+        view.window?.makeKeyAndVisible()
+    }
+
+    private func openUsersTableViewController() {
+        let listOfUsersTableViewController = ListOfUsersTableViewController()
+        present(listOfUsersTableViewController, animated: true)
+    }
+
     // MARK: Objc Methods
     @objc private func usersButtonDidTapped() {
         openUsersTableViewController()

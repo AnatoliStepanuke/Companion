@@ -70,7 +70,7 @@ final class ScheduleCell: UITableViewCell {
         containerStackView.addArrangedSubview(bottomVerticalStackView)
     }
 
-    // MARK: - TopVerticalStackView
+    // MARK: - SetupTopVerticalStackView
     private func setupTopVerticalStackView() {
         topVerticalStackView.axis = .horizontal
         topVerticalStackView.anchor(
@@ -85,6 +85,7 @@ final class ScheduleCell: UITableViewCell {
         topVerticalStackView.alignment = .lastBaseline
     }
 
+    // setupNameAndTypeSubjectStackView
     private func setupNameAndTypeSubjectStackView() {
         nameAndTypeSubjectStackView.axis = .vertical
         nameAndTypeSubjectStackView.addArrangedSubview(nameSubjectLabel)
@@ -103,6 +104,7 @@ final class ScheduleCell: UITableViewCell {
         typeSubjectLabel.textAlignment = .left
     }
 
+    // setupBuildingAndAudienceNumberStackView
     private func setupBuildingAndAudienceNumberStackView() {
         buildingAndAudienceNumberStackView.axis = .horizontal
         buildingAndAudienceNumberStackView.widthAnchor.constraint(
@@ -131,7 +133,7 @@ final class ScheduleCell: UITableViewCell {
         audienceNumberLabel.textAlignment = .left
     }
 
-    // MARK: - BottomVerticalStackView
+    // MARK: - SetupBottomVerticalStackView
     private func setupBottomVerticalStackView() {
         bottomVerticalStackView.axis = .horizontal
         bottomVerticalStackView.anchor(
@@ -150,6 +152,7 @@ final class ScheduleCell: UITableViewCell {
         bottomVerticalStackView.alignment = .center
     }
 
+    // setupTeacherNameStackView
     private func setupTeacherNameStackView() {
         teacherNameStackView.widthAnchor.constraint(
             equalTo: bottomVerticalStackView.widthAnchor,
@@ -164,6 +167,7 @@ final class ScheduleCell: UITableViewCell {
         teacherNameLabel.numberOfLines = 0
     }
 
+    // setupStartAndEndTimeSubjectStackView
     private func setupStartAndEndTimeSubjectStackView() {
         startAndEndTimeSubjectStackView.axis = .vertical
         startAndEndTimeSubjectStackView.widthAnchor.constraint(

@@ -2,11 +2,12 @@ import UIKit
 
 final class CustomPlainUIButton: UIButton {
     // MARK: - Init
-    init(systemName: String) {
+    init(systemName: String?, title: String?) {
         super.init(frame: .zero)
         setupConguration()
         setupSystemNameImage(systemName: systemName)
         setupForegroundColor()
+        setupTitle(title: title)
     }
 
     required init?(coder: NSCoder) {
@@ -18,11 +19,18 @@ final class CustomPlainUIButton: UIButton {
         configuration = .plain()
     }
 
-    private func setupSystemNameImage(systemName: String) {
-        configuration?.image = UIImage(systemName: systemName)
+    private func setupSystemNameImage(systemName: String?) {
+        if let systemName = systemName {
+            configuration?.image = UIImage(systemName: systemName)
+        }
     }
 
     private func setupForegroundColor() {
         configuration?.baseForegroundColor = AppColor.blackColor
+    }
+
+    private func setupTitle(title: String?) {
+        configuration?.title = title
+        configuration?.titleAlignment = .trailing
     }
 }

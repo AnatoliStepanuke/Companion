@@ -34,9 +34,9 @@ final class UserCell: UITableViewCell {
             trailing: trailingAnchor,
             bottom: bottomAnchor,
             padding: .init(
-                top: 12,
+                top: 9,
                 left: 0,
-                bottom: 12,
+                bottom: 9,
                 right: 0
             )
         )
@@ -55,7 +55,7 @@ final class UserCell: UITableViewCell {
             padding: .init(top: 0, left: 12, bottom: 0, right: 12)
         )
         profileImageStackView.widthAnchor.constraint(
-            equalTo: initialsStackView.widthAnchor, multiplier: 0.25
+            equalTo: containerStackView.widthAnchor, multiplier: 0.2
         ).isActive = true
         profileImageStackView.addArrangedSubview(userProfileImageView)
     }
