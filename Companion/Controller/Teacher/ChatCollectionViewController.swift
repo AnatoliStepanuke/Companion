@@ -4,8 +4,9 @@ import Firebase
 final class ChatCollectionViewController: UICollectionViewController, UITextFieldDelegate {
     // MARK: - Constants
     // MARK: Private
-    private let databaseReferenceToMessages = FirebaseManager.instance.databaseReferenceToMessages
+    private let databaseReferenceToMessagesCache = FirebaseManager.instance.databaseReferenceToMessagesCache
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
+    private let databaseReferenceToUserMessages = FirebaseManager.instance.databaseReferenceToMessagesByPerUser
     private let chatInputStackView = UIStackView()
     private let initialsStackView = UIStackView()
     private let sendButton = CustomPlainUIButton(systemName: "paperplane", title: nil)
@@ -81,8 +82,23 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     }
 
     // MARK: - Helpers
+    private func saveSenderAndRecipientMessageToDatabase(values: [String: Any], fromUserID: String, toUserID: String) {
+        let databaseReferenceToUniqueMessageID = databaseReferenceToMessagesCache.childByAutoId()
+
+        databaseReferenceToUniqueMessageID.updateChildValues(values) { error, _ in
+            if error == nil {
+                let messageID = databaseReferenceToUniqueMessageID.key
+                if let messageID = messageID {
+                    self.databaseReferenceToUserMessages.child(fromUserID).updateChildValues([messageID: 1])
+                    self.databaseReferenceToUserMessages.child(toUserID).updateChildValues([messageID: 1])
+                }
+            } else {
+                self.showAlertError(error: error)
+            }
+        }
+    }
+
     private func sendMessage() {
-        let uniqueKeyChildMessage = databaseReferenceToMessages.childByAutoId()
         let text = inputTextField.text ?? "message"
         let timeInterval = Int(Date().timeIntervalSince1970)
 
@@ -95,7 +111,7 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
                     "fromUserID": fromUserID,
                     "timeInterval": timeInterval
                 ]
-                uniqueKeyChildMessage.updateChildValues(values)
+                saveSenderAndRecipientMessageToDatabase(values: values, fromUserID: fromUserID, toUserID: toUserID)
                 inputTextField.text = ""
             } else {
                 present(
@@ -108,6 +124,14 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
         }
     }
 
+    // Firebase
+    private func showAlertError(error: Error?) {
+        present(
+            AlertManager.instance.showAlertError(error: error),
+            animated: true, completion: nil
+        )
+    }
+
     // MARK: - Actions
     // MARK: Objc Methods
     @objc private func sendButtonDidTapped() {
@@ -118,5 +142,10 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendMessage()
         return true
+    }
+
+    // MARK: - Touch responders
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }

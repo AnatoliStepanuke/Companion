@@ -1,6 +1,6 @@
 import Foundation
 
-extension Message {
+extension Chat {
     enum Constants {
         static let messageCell = "MessageCell"
     }

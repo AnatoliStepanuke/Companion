@@ -103,7 +103,7 @@ final class ChatCell: UITableViewCell {
     // MARK: SetupTimeStackView
     private func setupTimeStackView() {
         timeStackView.widthAnchor.constraint(
-            equalTo: containerStackView.widthAnchor, multiplier: 0.15
+            equalTo: containerStackView.widthAnchor, multiplier: 0.2
         ).isActive = true
         timeStackView.alignment = .leading
         timeStackView.addArrangedSubview(timeLabel)
@@ -116,55 +116,51 @@ final class ChatCell: UITableViewCell {
     }
 
     // MARK: - Helpers
-    private func fetchTeacherCompanionNameLabel(toUserID: String) {
-        FirebaseManager.instance.fetchUserNameToUILabel(
+    private func fetchTeacherCompanionNameLabel(chatPartnerId: String) {
+        FirebaseManager.instance.fetchUserPartnerNameLabel(
             dictionaryKey: "name",
-            toUserID: toUserID,
+            chatPartnerId: chatPartnerId,
             label: companionNameLabel,
             databaseRef: databaseReferenceToTeachers
         )
     }
 
-    private func fetchStudentCompanionNameLabel(toUserID: String) {
-        FirebaseManager.instance.fetchUserNameToUILabel(
+    private func fetchStudentCompanionNameLabel(chatPartnerId: String) {
+        FirebaseManager.instance.fetchUserPartnerNameLabel(
             dictionaryKey: "name",
-            toUserID: toUserID,
+            chatPartnerId: chatPartnerId,
             label: companionNameLabel,
             databaseRef: databaseReferenceToStudents
         )
     }
 
-    private func fetchTeacherCompanionProfileImageView(toUserID: String) {
-        databaseReferenceToTeachers.child(toUserID).observe(.value, with: { snapshot in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                if let profileImageURL = dictionary["profileImageURL"] as? String {
-                    self.userProfileImageView.loadImageUsingCache(profileImageURL)
-                }
-            }
-        }, withCancel: nil)
+    private func fetchTeacherCompanionProfileImageView(chatPartnerId: String) {
+        FirebaseManager.instance.fetchUserPartnerProfileImageView(
+            imageView: userProfileImageView,
+            chatPartnerId: chatPartnerId,
+            databaseRef: databaseReferenceToTeachers
+        )
     }
 
-    private func fetchStudentCompanionProfileImageView(toUserID: String) {
-        databaseReferenceToStudents.child(toUserID).observe(.value, with: { snapshot in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                if let profileImageURL = dictionary["profileImageURL"] as? String {
-                    self.userProfileImageView.loadImageUsingCache(profileImageURL)
-                }
-            }
-        }, withCancel: nil)
+    private func fetchStudentCompanionProfileImageView(chatPartnerId: String) {
+        FirebaseManager.instance.fetchUserPartnerProfileImageView(
+            imageView: userProfileImageView,
+            chatPartnerId: chatPartnerId,
+            databaseRef: databaseReferenceToStudents
+        )
     }
 
     // MARK: - API
-    func configure(using message: Message) {
-        if let toUserID = message.toUserID {
-            fetchTeacherCompanionNameLabel(toUserID: toUserID)
-            fetchStudentCompanionNameLabel(toUserID: toUserID)
-            fetchTeacherCompanionProfileImageView(toUserID: toUserID)
-            fetchStudentCompanionProfileImageView(toUserID: toUserID)
+    func configure(using chat: Chat) {
+        if let chatPartnerId = chat.chatPartnerId() {
+            fetchTeacherCompanionNameLabel(chatPartnerId: chatPartnerId)
+            fetchStudentCompanionNameLabel(chatPartnerId: chatPartnerId)
+            fetchTeacherCompanionProfileImageView(chatPartnerId: chatPartnerId)
+            fetchStudentCompanionProfileImageView(chatPartnerId: chatPartnerId)
         }
 
-        companionNameLabel.text = message.toUserID
-        textMessageLabel.text = message.text
-        timeLabel.text = message.timeDescription
+        companionNameLabel.text = chat.toUserID
+        textMessageLabel.text = chat.text
+        timeLabel.text = chat.timeDescription
     }
 }

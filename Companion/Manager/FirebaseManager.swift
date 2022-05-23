@@ -10,7 +10,8 @@ final class FirebaseManager {
     let databaseReference = Database.database().reference()
     let databaseReferenceToStudents = Database.database().reference().child("students")
     let databaseReferenceToTeachers = Database.database().reference().child("teachers")
-    let databaseReferenceToMessages = Database.database().reference().child("messages")
+    let databaseReferenceToMessagesCache = Database.database().reference().child("messages-cache")
+    let databaseReferenceToMessagesByPerUser = Database.database().reference().child("messages-by-per-user")
     let storageReference = Storage.storage().reference()
     let storageReferenceToStudentsImages = Storage.storage().reference().child("students_images").child("\(UUID().uuidString).jpg")
     let storageReferenceToTeachersImages = Storage.storage().reference().child("teachers_images").child("\(UUID().uuidString).jpg")
@@ -19,8 +20,8 @@ final class FirebaseManager {
     private init() { }
 
     // MARK: - API
-    func fetchUserNameToUILabel(dictionaryKey: String, toUserID: String, label: UILabel, databaseRef: DatabaseReference) {
-        databaseRef.child(toUserID).observe(.value, with: { snapshot in
+    func fetchUserPartnerNameLabel(dictionaryKey: String, chatPartnerId: String, label: UILabel, databaseRef: DatabaseReference) {
+        databaseRef.child(chatPartnerId).observe(.value, with: { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 label.text = dictionary[dictionaryKey] as? String
             }
@@ -38,5 +39,15 @@ final class FirebaseManager {
                 }
             }
         }
+    }
+
+    func fetchUserPartnerProfileImageView(imageView: UIImageView, chatPartnerId: String, databaseRef: DatabaseReference) {
+        databaseRef.child(chatPartnerId).observe(.value, with: { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                if let profileImageURL = dictionary["profileImageURL"] as? String {
+                    imageView.loadImageUsingCache(profileImageURL)
+                }
+            }
+        }, withCancel: nil)
     }
 }

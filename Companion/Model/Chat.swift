@@ -1,7 +1,8 @@
 import UIKit
+import FirebaseAuth
 
 // MARK: - Constructs
-struct Message {
+struct Chat {
     let text: String?
     let fromUserID: String?
     let toUserID: String?
@@ -17,7 +18,7 @@ struct Message {
 }
 
 // MARK: - Construct extensions
-extension Message {
+extension Chat {
     var timeDescription: String {
         guard let timeInterval = timeInterval else {
             fatalError("can't return timeInterval")
@@ -26,5 +27,9 @@ extension Message {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: Date(timeIntervalSince1970: timeInterval.doubleValue))
+    }
+
+    func chatPartnerId() -> String? {
+        return fromUserID == Auth.auth().currentUser?.uid ? toUserID : fromUserID
     }
 }
