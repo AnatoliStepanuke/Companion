@@ -6,7 +6,7 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: - Constants
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
-    private let databaseReferenceToMessages = FirebaseManager.instance.databaseReferenceToMessagesCache
+    private let databaseReferenceToMessagesCache = FirebaseManager.instance.databaseReferenceToMessagesCache
     private let databaseReferenceToUserMessages = FirebaseManager.instance.databaseReferenceToMessagesByPerUser
     private let personsImage = UIImage(systemName: "person.badge.plus")
     private let usersBarButton = UIBarButtonItem()
@@ -56,7 +56,7 @@ final class MessengerTableViewController: UITableViewController {
         tableView.rowHeight = 80
         tableView.register(
             ChatCell.self,
-            forCellReuseIdentifier: Chat.Constants.messageCell
+            forCellReuseIdentifier: Chat.Constants.chatCell
         )
     }
 
@@ -89,7 +89,14 @@ final class MessengerTableViewController: UITableViewController {
                 self.openAuthViewController()
             } else {
                 if let user = user {
-                    self.displayUserNameNavigationController(userID: user.uid)
+                    self.displayUserNameNavigationController(
+                        databaseRef: self.databaseReferenceToTeachers,
+                        userID: user.uid
+                    )
+                    self.displayUserNameNavigationController(
+                        databaseRef: self.databaseReferenceToStudents,
+                        userID: user.uid
+                    )
                 }
             }
         }
@@ -102,29 +109,21 @@ final class MessengerTableViewController: UITableViewController {
         Auth.auth().removeStateDidChangeListener(handle)
     }
 
-    private func displayUserNameNavigationController(userID: String) {
-        self.databaseReferenceToTeachers.child(userID).observeSingleEvent(of: .value) { snapshot in
+    private func displayUserNameNavigationController(databaseRef: DatabaseReference, userID: String) {
+        databaseRef.child(userID).observeSingleEvent(of: .value) { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 if let userName = dictionary["name"] as? String {
                     self.navigationItem.title = "Hi, \(userName)"
                 }
             }
         }
-        self.databaseReferenceToStudents.child(userID).observeSingleEvent(of: .value) { snapshot in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                if let userName = dictionary["name"] as? String {
-                    self.navigationItem.title = "Hi, \(userName)"
-                }
-            }
-        }
-
     }
 
     private func fetchChats() {
         if let userID = Auth.auth().currentUser?.uid {
             databaseReferenceToUserMessages.child(userID).observe(.childAdded) { snapshot in
                 let messageID = snapshot.key
-                self.databaseReferenceToMessages.child(messageID).observeSingleEvent(of: .value) { snapshot in
+                self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         self.sortChatsByUserID(dictionary: dictionary)
                         self.sortChatsbByTimeInterval()
@@ -137,6 +136,16 @@ final class MessengerTableViewController: UITableViewController {
         }
     }
 
+    private func openChat(databaseRef: DatabaseReference, chatPartnerID: String, indexPath: IndexPath) {
+        databaseRef.child(chatPartnerID).observeSingleEvent(of: .value) { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                var user = User(dictionary: dictionary)
+                user.id = chatPartnerID
+                self.openChatCollectionViewController(indexPath: indexPath, user: user)
+            }
+        }
+    }
+
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chats.count
@@ -144,7 +153,7 @@ final class MessengerTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Chat.Constants.messageCell,
+            withIdentifier: Chat.Constants.chatCell,
             for: indexPath
         ) as? ChatCell else {
             fatalError("DequeueReusableCell failed while casting.")
@@ -154,6 +163,22 @@ final class MessengerTableViewController: UITableViewController {
         cell.configure(using: chats[indexPath.row])
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chat = self.chats[indexPath.row]
+        if let chatPartnerID = chat.chatPartnerId() {
+            openChat(
+                databaseRef: databaseReferenceToTeachers,
+                chatPartnerID: chatPartnerID,
+                indexPath: indexPath
+            )
+            openChat(
+                databaseRef: databaseReferenceToStudents,
+                chatPartnerID: chatPartnerID,
+                indexPath: indexPath
+            )
+        }
     }
 
     // MARK: - Actions
@@ -166,6 +191,19 @@ final class MessengerTableViewController: UITableViewController {
     private func openUsersTableViewController() {
         let listOfUsersTableViewController = ListOfUsersTableViewController()
         present(listOfUsersTableViewController, animated: true)
+    }
+
+    private func openChatCollectionViewController(indexPath: IndexPath, user: User) {
+        let chatCollectionViewController = ChatCollectionViewController(
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
+        present(
+            NavigationStackManager.instance.presentCollectionViewController(
+                collectionVC: chatCollectionViewController
+            ), animated: true, completion: {
+                chatCollectionViewController.user = user
+            }
+        )
     }
 
     // MARK: Objc Methods

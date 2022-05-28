@@ -26,7 +26,7 @@ final class UserCell: UITableViewCell {
 
     // MARK: - Setups
     private func setupContainerView() {
-        self.addSubview(containerStackView)
+        addSubview(containerStackView)
         containerStackView.axis = .horizontal
         containerStackView.anchor(
             top: topAnchor,

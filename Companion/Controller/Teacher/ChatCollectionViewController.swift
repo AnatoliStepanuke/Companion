@@ -1,7 +1,9 @@
 import UIKit
 import Firebase
 
-final class ChatCollectionViewController: UICollectionViewController, UITextFieldDelegate {
+final class ChatCollectionViewController: UICollectionViewController,
+                                          UITextFieldDelegate,
+                                          UICollectionViewDelegateFlowLayout {
     // MARK: - Constants
     // MARK: Private
     private let databaseReferenceToMessagesCache = FirebaseManager.instance.databaseReferenceToMessagesCache
@@ -14,16 +16,21 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     private let companionLabel = UILabel()
 
     // MARK: - Properties
+    // MARK: Private
+    private var messages: [Chat] = []
+
+    // MARK: Public
     var user: User? {
         didSet {
             companionLabel.text = user?.name
+            fetchMessages()
         }
     }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupCollectionView()
         setupChatInputContainerView()
         setupInputTextField()
         setupSendButton()
@@ -32,10 +39,11 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     }
 
     // MARK: - Setups
-    private func setupView() {
-        view.backgroundColor = AppColor.shadowColor
-        view.addSubview(chatInputStackView)
-        view.addSubview(initialsStackView)
+    private func setupCollectionView() {
+        collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
+        collectionView.alwaysBounceVertical = true
+        collectionView.addSubview(chatInputStackView)
+        collectionView.addSubview(initialsStackView)
     }
 
     private func setupChatInputContainerView() {
@@ -124,6 +132,25 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
         }
     }
 
+    private func fetchMessages() {
+        if let userID = Auth.auth().currentUser?.uid {
+            databaseReferenceToUserMessages.child(userID).observe(.childAdded) { snapshot in
+                let messageID = snapshot.key
+                self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let message = Chat(dictionary: dictionary)
+                        if message.chatPartnerId() == self.user?.id {
+                            self.messages.append(message)
+                            DispatchQueue.main.async(execute: {
+                                self.collectionView?.reloadData()
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Firebase
     private func showAlertError(error: Error?) {
         present(
@@ -136,6 +163,34 @@ final class ChatCollectionViewController: UICollectionViewController, UITextFiel
     // MARK: Objc Methods
     @objc private func sendButtonDidTapped() {
         sendMessage()
+    }
+
+    // MARK: - CollectionView
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: MessageCell.Constants.messageCell,
+            for: indexPath
+        ) as? MessageCell else {
+            fatalError("DequeueReusableCell failed while casting.")
+        }
+        cell.textView.text = messages[indexPath.row].text
+
+        return cell
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
     }
 
     // MARK: - UITextFieldDelegate

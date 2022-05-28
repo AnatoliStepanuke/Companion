@@ -153,7 +153,13 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
 
     // Firebase
     // Saving
-    private func saveUserToDatabase(name: String, email: String, userID: String, databaseReference: DatabaseReference, absoluteStringURL: String) {
+    private func saveUserToDatabase(
+        name: String,
+        email: String,
+        userID: String,
+        databaseReference: DatabaseReference,
+        absoluteStringURL: String
+    ) {
         databaseReference.child(userID).updateChildValues([
             "name": name,
             "email": email,
@@ -161,7 +167,13 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
         ])
     }
 
-    private func saveUserToStorageAndDatabase(name: String, email: String, userID: String, databaseReference: DatabaseReference, storageReference: StorageReference) {
+    private func saveUserToStorageAndDatabase(
+        name: String,
+        email: String,
+        userID: String,
+        databaseReference: DatabaseReference,
+        storageReference: StorageReference
+    ) {
         if let profileImage = profileImageView.image,
            let uploadData = profileImage.jpegData(compressionQuality: 0.1) {
             storageReference.putData(uploadData, metadata: nil) { _, error in

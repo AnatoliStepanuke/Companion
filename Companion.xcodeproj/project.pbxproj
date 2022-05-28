@@ -42,11 +42,13 @@
 		DC92520527AE98CB00CC200B /* StudentProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */; };
 		DC96F3E52835175100774F49 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E42835175100774F49 /* Chat.swift */; };
 		DC96F3E72835224000774F49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E62835224000774F49 /* ChatCell.swift */; };
-		DC96F3E9283524B600774F49 /* Message+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E8283524B600774F49 /* Message+constants.swift */; };
+		DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E8283524B600774F49 /* Chat+constants.swift */; };
 		DC97645C281D4D620088F271 /* UserDefaults+keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC97645B281D4D620088F271 /* UserDefaults+keys.swift */; };
 		DC9F9D7F282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D7E282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift */; };
 		DC9F9D81282EAA5500D48201 /* ChatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */; };
 		DC9F9D83283286D300D48201 /* CustomPlainUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */; };
+		DCA8EE922842C11A00B48A06 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE912842C11A00B48A06 /* MessageCell.swift */; };
+		DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE932842C6DC00B48A06 /* Message+constants.swift */; };
 		DCA9B720283A633600A55A0B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B71F283A633600A55A0B /* FirebaseAnalytics */; };
 		DCA9B722283A633600A55A0B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B721283A633600A55A0B /* FirebaseAuth */; };
 		DCA9B724283A633600A55A0B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B723283A633600A55A0B /* FirebaseDatabase */; };
@@ -100,11 +102,13 @@
 		DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		DC96F3E42835175100774F49 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		DC96F3E62835224000774F49 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
-		DC96F3E8283524B600774F49 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
+		DC96F3E8283524B600774F49 /* Chat+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chat+constants.swift"; sourceTree = "<group>"; };
 		DC97645B281D4D620088F271 /* UserDefaults+keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+keys.swift"; sourceTree = "<group>"; };
 		DC9F9D7E282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageViewWithConfig.swift; sourceTree = "<group>"; };
 		DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewController.swift; sourceTree = "<group>"; };
 		DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlainUIButton.swift; sourceTree = "<group>"; };
+		DCA8EE912842C11A00B48A06 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		DCA8EE932842C6DC00B48A06 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
 		DCB2046327B442AB00B26AAB /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+singleton.swift"; sourceTree = "<group>"; };
 		DCC66222282D910900B915B2 /* UIImageView+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+constants.swift"; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				DC0AF02E27BAD3EF0006830F /* ScheduleCell.swift */,
 				DCDA64322825B9370002C09D /* UserCell.swift */,
 				DC96F3E62835224000774F49 /* ChatCell.swift */,
+				DCA8EE912842C11A00B48A06 /* MessageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -331,7 +336,8 @@
 				DC0AF03827BEC91B0006830F /* Schedule+constants.swift */,
 				DCDA64342825BC400002C09D /* User+constants.swift */,
 				DCC66222282D910900B915B2 /* UIImageView+constants.swift */,
-				DC96F3E8283524B600774F49 /* Message+constants.swift */,
+				DC96F3E8283524B600774F49 /* Chat+constants.swift */,
+				DCA8EE932842C6DC00B48A06 /* Message+constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -501,6 +507,7 @@
 				DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */,
 				DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */,
 				DC96F3E52835175100774F49 /* Chat.swift in Sources */,
+				DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */,
 				DC9F9D81282EAA5500D48201 /* ChatCollectionViewController.swift in Sources */,
 				DC9F9D83283286D300D48201 /* CustomPlainUIButton.swift in Sources */,
 				DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */,
@@ -519,6 +526,7 @@
 				DC92520127AE84DC00CC200B /* Color.swift in Sources */,
 				DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */,
 				DC49405C282C4CCB00448ACC /* UIIImageView+loadImages.swift in Sources */,
+				DCA8EE922842C11A00B48A06 /* MessageCell.swift in Sources */,
 				DCDA642B2825464F0002C09D /* ListOfUsersTableViewController.swift in Sources */,
 				DC6F67852821653900481FE8 /* Schedule.swift in Sources */,
 				DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */,
@@ -532,7 +540,7 @@
 				DC92520527AE98CB00CC200B /* StudentProfileViewController.swift in Sources */,
 				DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */,
 				DC92520327AE98C000CC200B /* HomeViewController.swift in Sources */,
-				DC96F3E9283524B600774F49 /* Message+constants.swift in Sources */,
+				DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */,
 				DC02F3612804A28C00A336DC /* LoginViewController.swift in Sources */,
 				DCDA6431282579280002C09D /* User.swift in Sources */,
 			);

@@ -8,7 +8,6 @@ final class StartViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private let companionLabel = UILabel()
     private let buttonsStackView = UIStackView()
-    private let databaseReference = FirebaseManager.instance.databaseReference
     private let databaseReferenceToStudents = FirebaseManager.instance.databaseReferenceToStudents
     private let databaseReferenceToTeachers = FirebaseManager.instance.databaseReferenceToTeachers
     private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: AppColor.blackColor)

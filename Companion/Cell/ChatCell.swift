@@ -38,7 +38,7 @@ final class ChatCell: UITableViewCell {
 
     // MARK: - Setups
     private func setupContainerView() {
-        self.addSubview(containerStackView)
+        addSubview(containerStackView)
         containerStackView.axis = .horizontal
         containerStackView.anchor(
             top: topAnchor,
