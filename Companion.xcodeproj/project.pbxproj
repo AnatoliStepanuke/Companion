@@ -15,7 +15,7 @@
 		DC02F3632804A83900A336DC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02F3622804A83900A336DC /* SignupViewController.swift */; };
 		DC0AF02F27BAD3EF0006830F /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0AF02E27BAD3EF0006830F /* ScheduleCell.swift */; };
 		DC0AF03927BEC91B0006830F /* Schedule+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0AF03827BEC91B0006830F /* Schedule+constants.swift */; };
-		DC15FF7B280A049800F2D10B /* TeacherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15FF7A280A049800F2D10B /* TeacherProfileViewController.swift */; };
+		DC15FF7B280A049800F2D10B /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */; };
 		DC1826582808392D00A6A9CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC1826572808392D00A6A9CF /* GoogleService-Info.plist */; };
 		DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */; };
 		DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */; };
@@ -38,8 +38,6 @@
 		DC7E040C27A98A1E00E036AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC7E040B27A98A1E00E036AE /* Assets.xcassets */; };
 		DC7E040F27A98A1E00E036AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC7E040D27A98A1E00E036AE /* LaunchScreen.storyboard */; };
 		DC92520127AE84DC00CC200B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92520027AE84DC00CC200B /* Color.swift */; };
-		DC92520327AE98C000CC200B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92520227AE98C000CC200B /* HomeViewController.swift */; };
-		DC92520527AE98CB00CC200B /* StudentProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */; };
 		DC96F3E52835175100774F49 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E42835175100774F49 /* Chat.swift */; };
 		DC96F3E72835224000774F49 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E62835224000774F49 /* ChatCell.swift */; };
 		DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96F3E8283524B600774F49 /* Chat+constants.swift */; };
@@ -49,6 +47,7 @@
 		DC9F9D83283286D300D48201 /* CustomPlainUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */; };
 		DCA8EE922842C11A00B48A06 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE912842C11A00B48A06 /* MessageCell.swift */; };
 		DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE932842C6DC00B48A06 /* Message+constants.swift */; };
+		DCA8EE962845242E00B48A06 /* Storyboards+IdentifierKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */; };
 		DCA9B720283A633600A55A0B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B71F283A633600A55A0B /* FirebaseAnalytics */; };
 		DCA9B722283A633600A55A0B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B721283A633600A55A0B /* FirebaseAuth */; };
 		DCA9B724283A633600A55A0B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B723283A633600A55A0B /* FirebaseDatabase */; };
@@ -73,7 +72,7 @@
 		DC02F3622804A83900A336DC /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		DC0AF02E27BAD3EF0006830F /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		DC0AF03827BEC91B0006830F /* Schedule+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+constants.swift"; sourceTree = "<group>"; };
-		DC15FF7A280A049800F2D10B /* TeacherProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfileViewController.swift; sourceTree = "<group>"; };
+		DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		DC1826572808392D00A6A9CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationStack+Manager.swift"; sourceTree = "<group>"; };
 		DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageView.swift; sourceTree = "<group>"; };
@@ -98,8 +97,6 @@
 		DC7E040E27A98A1E00E036AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC7E041027A98A1E00E036AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC92520027AE84DC00CC200B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		DC92520227AE98C000CC200B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileViewController.swift; sourceTree = "<group>"; };
 		DC96F3E42835175100774F49 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		DC96F3E62835224000774F49 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		DC96F3E8283524B600774F49 /* Chat+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chat+constants.swift"; sourceTree = "<group>"; };
@@ -109,6 +106,7 @@
 		DC9F9D82283286D300D48201 /* CustomPlainUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlainUIButton.swift; sourceTree = "<group>"; };
 		DCA8EE912842C11A00B48A06 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DCA8EE932842C6DC00B48A06 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
+		DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+IdentifierKeys.swift"; sourceTree = "<group>"; };
 		DCB2046327B442AB00B26AAB /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+singleton.swift"; sourceTree = "<group>"; };
 		DCC66222282D910900B915B2 /* UIImageView+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+constants.swift"; sourceTree = "<group>"; };
@@ -173,26 +171,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		DC15FF75280A036A00F2D10B /* Student */ = {
+		DC15FF76280A038200F2D10B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */,
-				DC92520227AE98C000CC200B /* HomeViewController.swift */,
-				DC7E040327A98A1D00E036AE /* ScheduleViewController.swift */,
-				DC92520427AE98CB00CC200B /* StudentProfileViewController.swift */,
-			);
-			path = Student;
-			sourceTree = "<group>";
-		};
-		DC15FF76280A038200F2D10B /* Teacher */ = {
-			isa = PBXGroup;
-			children = (
-				DC15FF7A280A049800F2D10B /* TeacherProfileViewController.swift */,
+				DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */,
 				DCDA642828252EA40002C09D /* MessengerTableViewController.swift */,
 				DCDA642A2825464F0002C09D /* ListOfUsersTableViewController.swift */,
 				DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */,
+				DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */,
+				DC7E040327A98A1D00E036AE /* ScheduleViewController.swift */,
 			);
-			path = Teacher;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		DC15FF77280A043900F2D10B /* Auth */ = {
@@ -297,8 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				DC15FF77280A043900F2D10B /* Auth */,
-				DC15FF76280A038200F2D10B /* Teacher */,
-				DC15FF75280A036A00F2D10B /* Student */,
+				DC15FF76280A038200F2D10B /* Main */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -355,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				DC97645B281D4D620088F271 /* UserDefaults+keys.swift */,
+				DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -498,6 +487,7 @@
 			files = (
 				DC6F677F28215EAA00481FE8 /* UISegmentedControl+addItems.swift in Sources */,
 				DC0AF03927BEC91B0006830F /* Schedule+constants.swift in Sources */,
+				DCA8EE962845242E00B48A06 /* Storyboards+IdentifierKeys.swift in Sources */,
 				DCB2046427B442AB00B26AAB /* UIView+Layout.swift in Sources */,
 				DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */,
 				DCDA64332825B9370002C09D /* UserCell.swift in Sources */,
@@ -521,7 +511,7 @@
 				DC6F677D28215EA400481FE8 /* UserManager+Constants.swift in Sources */,
 				DCDA642F282553A70002C09D /* FirebaseManager.swift in Sources */,
 				DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */,
-				DC15FF7B280A049800F2D10B /* TeacherProfileViewController.swift in Sources */,
+				DC15FF7B280A049800F2D10B /* UserProfileViewController.swift in Sources */,
 				DC0AF02F27BAD3EF0006830F /* ScheduleCell.swift in Sources */,
 				DC92520127AE84DC00CC200B /* Color.swift in Sources */,
 				DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */,
@@ -537,9 +527,7 @@
 				DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */,
 				DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */,
 				DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */,
-				DC92520527AE98CB00CC200B /* StudentProfileViewController.swift in Sources */,
 				DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */,
-				DC92520327AE98C000CC200B /* HomeViewController.swift in Sources */,
 				DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */,
 				DC02F3612804A28C00A336DC /* LoginViewController.swift in Sources */,
 				DCDA6431282579280002C09D /* User.swift in Sources */,

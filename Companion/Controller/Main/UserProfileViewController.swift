@@ -1,7 +1,7 @@
 import UIKit
 import FirebaseAuth
 
-final class TeacherProfileViewController: UIViewController {
+final class UserProfileViewController: UIViewController {
     // MARK: - Constants
     // MARK: - Private
     private let defaults = UserDefaults.standard
@@ -98,7 +98,7 @@ final class TeacherProfileViewController: UIViewController {
     private func userSignout() {
         do {
             try Auth.auth().signOut()
-            defaults.set(false, forKey: UserDefaults.Keys.isTeacherSignedIn)
+            defaults.set(false, forKey: UserDefaults.Keys.isUserLoggedIn)
         } catch let signoutError as NSError {
             print("Sign out error - \(signoutError)")
         }

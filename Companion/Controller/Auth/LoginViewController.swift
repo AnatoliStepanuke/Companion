@@ -7,8 +7,6 @@ final class LoginViewController: UIViewController {
     // MARK: - Private
     private let defaults = UserDefaults.standard
     private let mainStackView = UIStackView()
-    private let typeOfUserLabel = CustomUILabel(text: "Login as:")
-    private let typesOfUsersSegmentedControl = UISegmentedControl()
     private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
     private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
     private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: AppColor.blackColor)
@@ -19,7 +17,6 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupMainStackView()
-        setupTypesOfUsersSegmentedControl()
         setupLoginButton()
         setupPasswordRecoveryButton()
     }
@@ -43,20 +40,10 @@ final class LoginViewController: UIViewController {
         mainStackView.alignment = .fill
         mainStackView.distribution = .equalSpacing
         mainStackView.spacing = 24
-        mainStackView.addArrangedSubview(typeOfUserLabel)
-        mainStackView.addArrangedSubview(typesOfUsersSegmentedControl)
         mainStackView.addArrangedSubview(emailTextField)
         mainStackView.addArrangedSubview(passwordTextField)
         mainStackView.addArrangedSubview(loginButton)
         mainStackView.addArrangedSubview(passwordRecoveryButton)
-    }
-
-    private func setupTypesOfUsersSegmentedControl() {
-        typesOfUsersSegmentedControl.addItems(items: [
-            "Student",
-            "Teacher"
-        ])
-        typesOfUsersSegmentedControl.selectedSegmentIndex = 0
     }
 
     private func setupLoginButton() {
@@ -91,25 +78,12 @@ final class LoginViewController: UIViewController {
 
     // Firebase
     // Login
-    private func firebaseStudentSignin(email: String, password: String) {
+    private func userLogin(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if error == nil {
                 self.openAndSaveTabBarViewController(
-                    defaultsforKey: UserDefaults.Keys.isStudentSignedIn,
-                    identifier: "StudentTabBarController"
-                )
-            } else {
-                self.presentAlertError(error: error)
-            }
-        }
-    }
-
-    private func firebaseTeacherSignin(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-            if error == nil {
-                self.openAndSaveTabBarViewController(
-                    defaultsforKey: UserDefaults.Keys.isTeacherSignedIn,
-                    identifier: "TeacherTabBarController"
+                    defaultsforKey: UserDefaults.Keys.isUserLoggedIn,
+                    identifier: UIStoryboard.Keys.mainTabBarController
                 )
             } else {
                 self.presentAlertError(error: error)
@@ -122,11 +96,7 @@ final class LoginViewController: UIViewController {
         let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "userPassword"
 
         if !email.isEmpty && !password.isEmpty {
-            switch typesOfUsersSegmentedControl.selectedSegmentIndex {
-            case 0: firebaseStudentSignin(email: email, password: password)
-            case 1: firebaseTeacherSignin(email: email, password: password)
-            default: print("Login: Something going bad wrong")
-            }
+            userLogin(email: email, password: password)
         } else {
             presentAlertEmptyFields()
         }

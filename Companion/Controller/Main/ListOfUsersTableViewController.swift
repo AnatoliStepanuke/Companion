@@ -130,7 +130,7 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
 
     // MARK: - Helpers
     private func openTeacherProfileViewController() {
-        let teacherProfileViewController = TeacherProfileViewController()
+        let teacherProfileViewController = UserProfileViewController()
         present(teacherProfileViewController, animated: true)
     }
 

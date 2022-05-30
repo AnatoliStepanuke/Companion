@@ -213,8 +213,8 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
                         storageReference: self.storageReferenceToStudentsImages
                     )
                     self.openAndSaveTabBarViewController(
-                        defaultsforKey: UserDefaults.Keys.isStudentSignedIn,
-                        identifier: "StudentTabBarController"
+                        defaultsforKey: UserDefaults.Keys.isUserLoggedIn,
+                        identifier: "TeacherTabBarController"
                     )
                 }
             } else {
@@ -223,7 +223,7 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
 
-    private func createAndSaveTeacher(name: String, email: String, password: String, reference: DatabaseReference) {
+    private func createAndSaveTeacher(name: String, email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if error == nil {
                 if let result = result {
@@ -235,7 +235,7 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
                         storageReference: self.storageReferenceToTeachersImages
                     )
                     self.openAndSaveTabBarViewController(
-                        defaultsforKey: UserDefaults.Keys.isTeacherSignedIn,
+                        defaultsforKey: UserDefaults.Keys.isUserLoggedIn,
                         identifier: "TeacherTabBarController"
                     )
                 }
@@ -252,8 +252,8 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
 
         if !name.isEmpty && !email.isEmpty && !password.isEmpty {
             showAlertSignin(
-                title: "Which client to enter?",
-                message: "You can change client type during re-login",
+                title: "Attention",
+                message: "Choose a client for sign in:\n In future your data can't be rewrited",
                 name: name,
                 email: email,
                 password: password
@@ -265,20 +265,19 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
 
     // Show alert
     private func showAlertSignin(title: String, message: String, name: String, email: String, password: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Sign in now as a student", style: .default, handler: { _ in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Sign in as a student", style: .default, handler: { _ in
             self.createAndSaveStudent(
                 name: name,
                 email: email,
                 password: password
             )
         }))
-        alert.addAction(UIAlertAction(title: "Sign in now as a teacher", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Sign in as a teacher", style: .default, handler: { _ in
             self.createAndSaveTeacher(
                 name: name,
                 email: email,
-                password: password,
-                reference: self.databaseReferenceToTeachers
+                password: password
             )
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
