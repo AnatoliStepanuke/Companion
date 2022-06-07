@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC0193172819800900A799C0 /* Alert+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0193162819800900A799C0 /* Alert+Manager.swift */; };
+		DC0193172819800900A799C0 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0193162819800900A799C0 /* AlertManager.swift */; };
 		DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */; };
 		DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01931C281AD3BA00A799C0 /* CustomRoundedUIButton.swift */; };
 		DC02F35F280499E500A336DC /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02F35E280499E500A336DC /* StartViewController.swift */; };
@@ -17,7 +17,7 @@
 		DC0AF03927BEC91B0006830F /* Schedule+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0AF03827BEC91B0006830F /* Schedule+constants.swift */; };
 		DC15FF7B280A049800F2D10B /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */; };
 		DC1826582808392D00A6A9CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC1826572808392D00A6A9CF /* GoogleService-Info.plist */; };
-		DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */; };
+		DC283CC4280EE19200C7042B /* NavigationStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC283CC3280EE19200C7042B /* NavigationStackManager.swift */; };
 		DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */; };
 		DC49405C282C4CCB00448ACC /* UIIImageView+loadImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */; };
 		DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */; };
@@ -26,7 +26,7 @@
 		DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */; };
 		DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */; };
 		DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */; };
-		DC6F677D28215EA400481FE8 /* UserManager+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677C28215EA400481FE8 /* UserManager+Constants.swift */; };
+		DC6F677D28215EA400481FE8 /* UserManager+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677C28215EA400481FE8 /* UserManager+constants.swift */; };
 		DC6F677F28215EAA00481FE8 /* UISegmentedControl+addItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */; };
 		DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F678028215EBF00481FE8 /* UserManager.swift */; };
 		DC6F67852821653900481FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F67842821653900481FE8 /* Schedule.swift */; };
@@ -52,7 +52,7 @@
 		DCA9B722283A633600A55A0B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B721283A633600A55A0B /* FirebaseAuth */; };
 		DCA9B724283A633600A55A0B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B723283A633600A55A0B /* FirebaseDatabase */; };
 		DCA9B726283A633600A55A0B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DCA9B725283A633600A55A0B /* FirebaseStorage */; };
-		DCB2046427B442AB00B26AAB /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2046327B442AB00B26AAB /* UIView+Layout.swift */; };
+		DCB2046427B442AB00B26AAB /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2046327B442AB00B26AAB /* UIView+constraints.swift */; };
 		DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */; };
 		DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC66222282D910900B915B2 /* UIImageView+constants.swift */; };
 		DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA642828252EA40002C09D /* MessengerTableViewController.swift */; };
@@ -64,7 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DC0193162819800900A799C0 /* Alert+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Manager.swift"; sourceTree = "<group>"; };
+		DC0193162819800900A799C0 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthtUITextField.swift; sourceTree = "<group>"; };
 		DC01931C281AD3BA00A799C0 /* CustomRoundedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedUIButton.swift; sourceTree = "<group>"; };
 		DC02F35E280499E500A336DC /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		DC0AF03827BEC91B0006830F /* Schedule+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+constants.swift"; sourceTree = "<group>"; };
 		DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		DC1826572808392D00A6A9CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationStack+Manager.swift"; sourceTree = "<group>"; };
+		DC283CC3280EE19200C7042B /* NavigationStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackManager.swift; sourceTree = "<group>"; };
 		DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageView.swift; sourceTree = "<group>"; };
 		DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIIImageView+loadImages.swift"; sourceTree = "<group>"; };
 		DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenForSaveSubjectViewController.swift; sourceTree = "<group>"; };
 		DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+roundedButton+colorButton.swift"; sourceTree = "<group>"; };
 		DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+singleton.swift"; sourceTree = "<group>"; };
-		DC6F677C28215EA400481FE8 /* UserManager+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+Constants.swift"; sourceTree = "<group>"; };
+		DC6F677C28215EA400481FE8 /* UserManager+constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+constants.swift"; sourceTree = "<group>"; };
 		DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+addItems.swift"; sourceTree = "<group>"; };
 		DC6F678028215EBF00481FE8 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		DC6F67842821653900481FE8 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		DCA8EE912842C11A00B48A06 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		DCA8EE932842C6DC00B48A06 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
 		DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+IdentifierKeys.swift"; sourceTree = "<group>"; };
-		DCB2046327B442AB00B26AAB /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		DCB2046327B442AB00B26AAB /* UIView+constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
 		DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+singleton.swift"; sourceTree = "<group>"; };
 		DCC66222282D910900B915B2 /* UIImageView+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+constants.swift"; sourceTree = "<group>"; };
 		DCDA642828252EA40002C09D /* MessengerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerTableViewController.swift; sourceTree = "<group>"; };
@@ -133,22 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DC01931328197D2A00A799C0 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				DC283CC3280EE19200C7042B /* NavigationStack+Manager.swift */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
-		DC01931528197FDF00A799C0 /* ShowAlert */ = {
-			isa = PBXGroup;
-			children = (
-				DC0193162819800900A799C0 /* Alert+Manager.swift */,
-			);
-			path = ShowAlert;
-			sourceTree = "<group>";
-		};
 		DC019319281ACDD600A799C0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,12 +158,9 @@
 		DC15FF76280A038200F2D10B /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */,
-				DCDA642828252EA40002C09D /* MessengerTableViewController.swift */,
-				DCDA642A2825464F0002C09D /* ListOfUsersTableViewController.swift */,
-				DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */,
-				DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */,
-				DC7E040327A98A1D00E036AE /* ScheduleViewController.swift */,
+				DCA8EE972848CDC100B48A06 /* Messenger */,
+				DCA8EE982848CDDC00B48A06 /* Schedule */,
+				DCA8EE992848CDE800B48A06 /* Profile */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -193,15 +174,6 @@
 				DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		DC299BFA28197C9C0038209F /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				DC01931528197FDF00A799C0 /* ShowAlert */,
-				DC01931328197D2A00A799C0 /* Navigation */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		DC7E03F327A98A1D00E036AE = {
@@ -234,8 +206,7 @@
 				DC7E041027A98A1E00E036AE /* Info.plist */,
 				DC7E041727A98F3C00E036AE /* Manager */,
 				DC7E041927A98F5D00E036AE /* Model */,
-				DC299BFA28197C9C0038209F /* Router */,
-				DC7E041C27A98FB300E036AE /* View */,
+				DC7E042027A98FFF00E036AE /* Storyboard */,
 			);
 			path = Companion;
 			sourceTree = "<group>";
@@ -252,8 +223,10 @@
 		DC7E041727A98F3C00E036AE /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				DC0193162819800900A799C0 /* AlertManager.swift */,
 				DC6F678028215EBF00481FE8 /* UserManager.swift */,
 				DCDA642E282553A70002C09D /* FirebaseManager.swift */,
+				DC283CC3280EE19200C7042B /* NavigationStackManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -261,13 +234,10 @@
 		DC7E041827A98F4F00E036AE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DCB0CF212848D9BC00EE7B06 /* Methods */,
 				DC96F3EC28352B2400774F49 /* Keys */,
 				DC96F3EB28352AF000774F49 /* Singleton */,
 				DC96F3EA28352AB300774F49 /* Constants */,
-				DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */,
-				DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */,
-				DCB2046327B442AB00B26AAB /* UIView+Layout.swift */,
-				DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -300,14 +270,6 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		DC7E041C27A98FB300E036AE /* View */ = {
-			isa = PBXGroup;
-			children = (
-				DC7E042027A98FFF00E036AE /* Storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		DC7E042027A98FFF00E036AE /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,7 +282,7 @@
 		DC96F3EA28352AB300774F49 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				DC6F677C28215EA400481FE8 /* UserManager+Constants.swift */,
+				DC6F677C28215EA400481FE8 /* UserManager+constants.swift */,
 				DC0AF03827BEC91B0006830F /* Schedule+constants.swift */,
 				DCDA64342825BC400002C09D /* User+constants.swift */,
 				DCC66222282D910900B915B2 /* UIImageView+constants.swift */,
@@ -381,6 +343,44 @@
 				DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */,
 			);
 			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		DCA8EE972848CDC100B48A06 /* Messenger */ = {
+			isa = PBXGroup;
+			children = (
+				DCDA642828252EA40002C09D /* MessengerTableViewController.swift */,
+				DCDA642A2825464F0002C09D /* ListOfUsersTableViewController.swift */,
+				DC9F9D80282EAA5400D48201 /* ChatCollectionViewController.swift */,
+			);
+			path = Messenger;
+			sourceTree = "<group>";
+		};
+		DCA8EE982848CDDC00B48A06 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				DC7E040327A98A1D00E036AE /* ScheduleViewController.swift */,
+				DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		DCA8EE992848CDE800B48A06 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DC15FF7A280A049800F2D10B /* UserProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DCB0CF212848D9BC00EE7B06 /* Methods */ = {
+			isa = PBXGroup;
+			children = (
+				DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */,
+				DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */,
+				DCB2046327B442AB00B26AAB /* UIView+constraints.swift */,
+				DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */,
+			);
+			path = Methods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,7 +488,7 @@
 				DC6F677F28215EAA00481FE8 /* UISegmentedControl+addItems.swift in Sources */,
 				DC0AF03927BEC91B0006830F /* Schedule+constants.swift in Sources */,
 				DCA8EE962845242E00B48A06 /* Storyboards+IdentifierKeys.swift in Sources */,
-				DCB2046427B442AB00B26AAB /* UIView+Layout.swift in Sources */,
+				DCB2046427B442AB00B26AAB /* UIView+constraints.swift in Sources */,
 				DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */,
 				DCDA64332825B9370002C09D /* UserCell.swift in Sources */,
 				DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */,
@@ -504,11 +504,11 @@
 				DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */,
 				DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */,
 				DC7E040027A98A1D00E036AE /* AppDelegate.swift in Sources */,
-				DC0193172819800900A799C0 /* Alert+Manager.swift in Sources */,
+				DC0193172819800900A799C0 /* AlertManager.swift in Sources */,
 				DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */,
 				DC02F35F280499E500A336DC /* StartViewController.swift in Sources */,
 				DC7E040A27A98A1D00E036AE /* Companion.xcdatamodeld in Sources */,
-				DC6F677D28215EA400481FE8 /* UserManager+Constants.swift in Sources */,
+				DC6F677D28215EA400481FE8 /* UserManager+constants.swift in Sources */,
 				DCDA642F282553A70002C09D /* FirebaseManager.swift in Sources */,
 				DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */,
 				DC15FF7B280A049800F2D10B /* UserProfileViewController.swift in Sources */,
@@ -525,7 +525,7 @@
 				DCDA64352825BC400002C09D /* User+constants.swift in Sources */,
 				DC02F3632804A83900A336DC /* SignupViewController.swift in Sources */,
 				DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */,
-				DC283CC4280EE19200C7042B /* NavigationStack+Manager.swift in Sources */,
+				DC283CC4280EE19200C7042B /* NavigationStackManager.swift in Sources */,
 				DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */,
 				DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */,
 				DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */,

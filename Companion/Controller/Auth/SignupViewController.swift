@@ -214,7 +214,7 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
                     )
                     self.openAndSaveTabBarViewController(
                         defaultsforKey: UserDefaults.Keys.isUserLoggedIn,
-                        identifier: "TeacherTabBarController"
+                        identifier: UIStoryboard.Keys.mainTabBarController
                     )
                 }
             } else {
@@ -236,7 +236,7 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
                     )
                     self.openAndSaveTabBarViewController(
                         defaultsforKey: UserDefaults.Keys.isUserLoggedIn,
-                        identifier: "TeacherTabBarController"
+                        identifier: UIStoryboard.Keys.mainTabBarController
                     )
                 }
             } else {

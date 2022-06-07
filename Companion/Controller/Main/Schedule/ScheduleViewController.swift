@@ -91,6 +91,7 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         tableView.backgroundColor = AppColor.shadowColor
         tableView.rowHeight = 155
         tableView.separatorStyle = .none
@@ -173,8 +174,27 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         ) as? ScheduleCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
+        cell.backgroundColor = AppColor.shadowColor
         cell.configure(using: filteredSchedule[indexPath.row])
 
         return cell
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Delete",
+            handler: { (_:UIContextualAction, _:UIView, _:(Bool) -> Void) in
+                self.filteredSchedule.remove(at: indexPath.row)
+                self.scheduleFromUserDefaults.remove(at: indexPath.row)
+                UserManager.instance.updateSchedulesFromUserDefaults(updatedSchedules: self.scheduleFromUserDefaults)
+                tableView.reloadData()
+            }
+        )
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
