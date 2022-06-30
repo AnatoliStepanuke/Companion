@@ -46,7 +46,7 @@ final class ChatCollectionViewController: UICollectionViewController,
         collectionView?.contentInset = UIEdgeInsets(
             top: 8,
             left: 0,
-            bottom: 64,
+            bottom: 72,
             right: 0
         )
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
@@ -239,6 +239,7 @@ final class ChatCollectionViewController: UICollectionViewController,
         }
         cell.messageTextView.text = messages[indexPath.row].text
         estimateWidthFrameForTextMessage(indexPath: indexPath, cell: cell)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
 
         return cell
     }

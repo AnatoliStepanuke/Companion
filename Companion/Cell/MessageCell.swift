@@ -42,6 +42,7 @@ final class MessageCell: UICollectionViewCell {
         messageBubbleWidth?.isActive = true
         messageBubbleView.backgroundColor = .systemBlue
         messageBubbleView.layer.cornerRadius = 16
+        messageBubbleView.layer.masksToBounds = true
     }
 
     private func setupMessageTextView() {
@@ -58,6 +59,7 @@ final class MessageCell: UICollectionViewCell {
                 right: 4
             )
         )
+        messageTextView.isEditable = false
         messageTextView.backgroundColor = .clear
         messageTextView.font = UIFont.systemFont(ofSize: 16)
         messageTextView.textColor = .white
