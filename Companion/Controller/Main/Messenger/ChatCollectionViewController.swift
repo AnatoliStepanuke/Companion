@@ -14,10 +14,13 @@ final class ChatCollectionViewController: UICollectionViewController,
     private let sendButton = CustomPlainUIButton(systemName: "paperplane", title: nil)
     private let inputTextField = UITextField()
     private let companionLabel = UILabel()
+    private let messageFrameSize = CGSize(width: 250, height: 500)
+    private let drawingOptions = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
 
     // MARK: - Properties
     // MARK: Private
     private var messages: [Chat] = []
+    private var messageHeight: CGFloat?
 
     // MARK: Public
     var user: User? {
@@ -40,6 +43,12 @@ final class ChatCollectionViewController: UICollectionViewController,
 
     // MARK: - Setups
     private func setupCollectionView() {
+        collectionView?.contentInset = UIEdgeInsets(
+            top: 8,
+            left: 0,
+            bottom: 64,
+            right: 0
+        )
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
         collectionView.alwaysBounceVertical = true
         collectionView.addSubview(chatInputStackView)
@@ -52,17 +61,25 @@ final class ChatCollectionViewController: UICollectionViewController,
             leading: view.safeAreaLayoutGuide.leadingAnchor,
             trailing: view.safeAreaLayoutGuide.trailingAnchor,
             bottom: initialsStackView.topAnchor,
-            padding: .init(top: 0, left: 12, bottom: 0, right: 12),
             size: .init(width: 0, height: 50)
         )
         chatInputStackView.addArrangedSubview(inputTextField)
         chatInputStackView.addArrangedSubview(sendButton)
         chatInputStackView.alignment = .center
         chatInputStackView.distribution = .equalCentering
+        chatInputStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
     }
 
     private func setupInputTextField() {
-        inputTextField.widthAnchor.constraint(equalTo: chatInputStackView.widthAnchor, multiplier: 0.85).isActive = true
+        inputTextField.widthAnchor.constraint(equalTo: chatInputStackView.widthAnchor, multiplier: 0.85
+        ).isActive = true
+        inputTextField.anchor(
+            top: nil,
+            leading: chatInputStackView.leadingAnchor,
+            trailing: nil,
+            bottom: nil,
+            padding: .init(top: 0, left: 12, bottom: 0, right: 0)
+        )
         inputTextField.delegate = self
         inputTextField.placeholder = "Enter message..."
     }
@@ -76,12 +93,13 @@ final class ChatCollectionViewController: UICollectionViewController,
             top: chatInputStackView.bottomAnchor,
             leading: view.safeAreaLayoutGuide.leadingAnchor,
             trailing: view.safeAreaLayoutGuide.trailingAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            bottom: view.bottomAnchor,
             size: .init(width: 0, height: 50)
         )
         initialsStackView.addArrangedSubview(companionLabel)
-        initialsStackView.alignment = .center
+        initialsStackView.alignment = .top
         initialsStackView.distribution = .equalCentering
+        initialsStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
     }
 
     private func setupCompanionLabel() {
@@ -125,13 +143,53 @@ final class ChatCollectionViewController: UICollectionViewController,
                 present(
                     AlertManager.instance.showAlert(
                         title: "Error",
-                        message: "The requested UserID was not found."
+                        message: "The requested UserID has not found."
                     ), animated: true
                 )
             }
         }
     }
 
+    private func estimateFrameForTextMessage(text: String) -> CGRect {
+        return NSString(string: text).boundingRect(
+            with: messageFrameSize,
+            options: drawingOptions,
+            attributes: convertToOptionalNSAttributedStringKeyDictionary([
+                convertFromNSAttributedStringKey(NSAttributedString.Key.font): UIFont.systemFont(ofSize: 16)
+            ]),
+            context: nil
+        )
+    }
+
+    private func estimateWidthFrameForTextMessage(indexPath: IndexPath, cell: MessageCell) {
+        if let text = messages[indexPath.row].text {
+            cell.messageBubbleWidth?.constant = estimateFrameForTextMessage(text: text).width + 32
+            cell.messageTextView.isHidden = false
+        }
+    }
+
+    private func estimateHeightFrameForTextMessage(indexPath: IndexPath) {
+        if let text = messages[indexPath.item].text {
+            messageHeight = estimateFrameForTextMessage(text: text).height + 32
+        }
+    }
+
+    private func convertToOptionalNSAttributedStringKeyDictionary(
+        _ input: [String: Any]?
+    ) -> [NSAttributedString.Key: Any]? {
+        guard let input = input else { return nil }
+        return Dictionary(uniqueKeysWithValues: input.map { key, value in
+            (NSAttributedString.Key(rawValue: key), value)
+        })
+    }
+
+    private func convertFromNSAttributedStringKey(
+        _ input: NSAttributedString.Key
+    ) -> String {
+        return input.rawValue
+    }
+
+    // Firebase
     private func fetchMessages() {
         if let userID = Auth.auth().currentUser?.uid {
             databaseReferenceToUserMessages.child(userID).observe(.childAdded) { snapshot in
@@ -151,7 +209,6 @@ final class ChatCollectionViewController: UICollectionViewController,
         }
     }
 
-    // Firebase
     private func showAlertError(error: Error?) {
         present(
             AlertManager.instance.showAlertError(error: error),
@@ -180,7 +237,8 @@ final class ChatCollectionViewController: UICollectionViewController,
         ) as? MessageCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
-        cell.textView.text = messages[indexPath.row].text
+        cell.messageTextView.text = messages[indexPath.row].text
+        estimateWidthFrameForTextMessage(indexPath: indexPath, cell: cell)
 
         return cell
     }
@@ -190,7 +248,8 @@ final class ChatCollectionViewController: UICollectionViewController,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
+        estimateHeightFrameForTextMessage(indexPath: indexPath)
+        return CGSize(width: view.frame.width, height: messageHeight ?? 0)
     }
 
     // MARK: - UITextFieldDelegate
