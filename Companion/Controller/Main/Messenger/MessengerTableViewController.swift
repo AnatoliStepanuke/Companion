@@ -63,8 +63,8 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: - Helpers
     private func sortChatsByUserID(dictionary: [String: AnyObject]) {
         let chat = Chat(dictionary: dictionary)
-        if let messageToUserID = chat.toUserID {
-            chatsDictionary[messageToUserID] = chat
+        if let chatPartnerID = chat.chatPartnerId() {
+            chatsDictionary[chatPartnerID] = chat
         }
         chats = Array(chatsDictionary.values)
     }

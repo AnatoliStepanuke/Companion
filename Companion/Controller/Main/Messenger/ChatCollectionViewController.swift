@@ -49,6 +49,12 @@ final class ChatCollectionViewController: UICollectionViewController,
             bottom: 72,
             right: 0
         )
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(
+            top: 8,
+            left: 0,
+            bottom: 72,
+            right: 0
+        )
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
         collectionView.alwaysBounceVertical = true
         collectionView.addSubview(chatInputStackView)
