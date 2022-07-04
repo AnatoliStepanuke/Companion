@@ -1,8 +1,6 @@
 import UIKit
 import Firebase
 
-// test github auth problem
-
 final class ChatCollectionViewController: UICollectionViewController,
                                           UITextFieldDelegate,
                                           UICollectionViewDelegateFlowLayout {
@@ -61,6 +59,33 @@ final class ChatCollectionViewController: UICollectionViewController,
         collectionView.alwaysBounceVertical = true
         collectionView.addSubview(chatInputStackView)
         collectionView.addSubview(initialsStackView)
+    }
+
+    private func setupColorMessageCell(message: Chat, cell: MessageCell) {
+        if message.fromUserID == Auth.auth().currentUser?.uid {
+            cell.messageBubbleView.backgroundColor = .systemBlue
+            cell.messageTextView.textColor = .white
+            cell.messageBubbleRightAnchor?.isActive = true
+            cell.messageBubbleLeftAnchor?.isActive = false
+        } else {
+            cell.messageBubbleView.backgroundColor = .systemGray5
+            cell.messageTextView.textColor = .black
+            cell.messageBubbleRightAnchor?.isActive = false
+            cell.messageBubbleLeftAnchor?.isActive = true
+        }
+    }
+
+    private func setupWidthMessageCell(indexPath: IndexPath, cell: MessageCell) {
+        if let text = messages[indexPath.row].text {
+            cell.messageBubbleWidth?.constant = estimateFrameForTextMessage(text: text).width + 32
+            cell.messageTextView.isHidden = false
+        }
+    }
+
+    private func setupHeightMessageCell(indexPath: IndexPath) {
+        if let text = messages[indexPath.item].text {
+            messageHeight = estimateFrameForTextMessage(text: text).height + 32
+        }
     }
 
     private func setupChatInputContainerView() {
@@ -169,19 +194,6 @@ final class ChatCollectionViewController: UICollectionViewController,
         )
     }
 
-    private func estimateWidthFrameForTextMessage(indexPath: IndexPath, cell: MessageCell) {
-        if let text = messages[indexPath.row].text {
-            cell.messageBubbleWidth?.constant = estimateFrameForTextMessage(text: text).width + 32
-            cell.messageTextView.isHidden = false
-        }
-    }
-
-    private func estimateHeightFrameForTextMessage(indexPath: IndexPath) {
-        if let text = messages[indexPath.item].text {
-            messageHeight = estimateFrameForTextMessage(text: text).height + 32
-        }
-    }
-
     private func convertToOptionalNSAttributedStringKeyDictionary(
         _ input: [String: Any]?
     ) -> [NSAttributedString.Key: Any]? {
@@ -245,10 +257,10 @@ final class ChatCollectionViewController: UICollectionViewController,
         ) as? MessageCell else {
             fatalError("DequeueReusableCell failed while casting.")
         }
-        cell.messageTextView.text = messages[indexPath.row].text
-        estimateWidthFrameForTextMessage(indexPath: indexPath, cell: cell)
-        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
-
+        let message = messages[indexPath.row]
+        cell.messageTextView.text = message.text
+        setupColorMessageCell(message: message, cell: cell)
+        setupWidthMessageCell(indexPath: indexPath, cell: cell)
         return cell
     }
 
@@ -257,7 +269,7 @@ final class ChatCollectionViewController: UICollectionViewController,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        estimateHeightFrameForTextMessage(indexPath: indexPath)
+        setupHeightMessageCell(indexPath: indexPath)
         return CGSize(width: view.frame.width, height: messageHeight ?? 0)
     }
 
