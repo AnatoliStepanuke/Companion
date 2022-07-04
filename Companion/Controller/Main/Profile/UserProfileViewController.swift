@@ -1,12 +1,13 @@
 import UIKit
 import FirebaseAuth
 
-final class TeacherProfileViewController: UIViewController {
+final class UserProfileViewController: UIViewController {
     // MARK: - Constants
     // MARK: - Private
     private let defaults = UserDefaults.standard
     private let mainStackView = UIStackView()
     private let signoutButton = UIButton()
+    private let changePasswordButton = UIButton()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -15,6 +16,7 @@ final class TeacherProfileViewController: UIViewController {
         setupNavigationController()
         setupMainStackView()
         setupSignoutButton()
+        setupPasswordRecovery()
     }
 
     // MARK: - Setups
@@ -41,6 +43,7 @@ final class TeacherProfileViewController: UIViewController {
         mainStackView.distribution = .equalSpacing
         mainStackView.spacing = 24
         mainStackView.addArrangedSubview(signoutButton)
+        mainStackView.addArrangedSubview(changePasswordButton)
     }
 
     private func setupSignoutButton() {
@@ -52,6 +55,17 @@ final class TeacherProfileViewController: UIViewController {
         signoutButton.configuration?.image = UIImage(systemName: "person.fill.xmark")
         signoutButton.configuration?.imagePadding = 36
         signoutButton.addTarget(self, action: #selector(signoutButtonDidTapped), for: .touchUpInside)
+    }
+
+    private func setupPasswordRecovery() {
+        changePasswordButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
+        changePasswordButton.configuration = .bordered()
+        changePasswordButton.configuration?.title = "Change password"
+        changePasswordButton.configuration?.subtitle = "Open screen to change password"
+        changePasswordButton.configuration?.baseForegroundColor = .black
+        changePasswordButton.configuration?.image = UIImage(systemName: "lock.shield.fill")
+        changePasswordButton.configuration?.imagePadding = 36
+        changePasswordButton.addTarget(self, action: #selector(changePasswordButtonDidTapped), for: .touchUpInside)
     }
 
     // MARK: - Helpers
@@ -75,11 +89,16 @@ final class TeacherProfileViewController: UIViewController {
         })
     }
 
+    private func openPasswordRecoveryViewController() {
+        let passwordRecoveryViewController = PasswordRecoveryViewController()
+        present(passwordRecoveryViewController, animated: true)
+    }
+
     // Firebase
     private func userSignout() {
         do {
             try Auth.auth().signOut()
-            defaults.set(false, forKey: UserDefaults.Keys.isTeacherSignedIn)
+            defaults.set(false, forKey: UserDefaults.Keys.isUserLoggedIn)
         } catch let signoutError as NSError {
             print("Sign out error - \(signoutError)")
         }
@@ -89,5 +108,9 @@ final class TeacherProfileViewController: UIViewController {
     // MARK: Objc Methods
     @objc private func signoutButtonDidTapped() {
         showAlertSignout(title: "Do you really want to sign out?", message: "This action is can't be reverted")
+    }
+
+    @objc private func changePasswordButtonDidTapped() {
+       openPasswordRecoveryViewController()
     }
 }

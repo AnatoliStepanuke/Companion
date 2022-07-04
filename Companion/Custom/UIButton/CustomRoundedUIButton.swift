@@ -29,6 +29,6 @@ final class CustomRoundedUIButton: UIButton {
 
     private func setupColorsButton(fontColor: UIColor) {
         setTitleColor(fontColor, for: .normal)
-        backgroundColor = .white
+        backgroundColor = .systemGray4
     }
 }

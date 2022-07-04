@@ -8,11 +8,8 @@ final class StartViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private let companionLabel = UILabel()
     private let buttonsStackView = UIStackView()
-    private let databaseReference = Database.database().reference()
-    private let databaseReferenceToStudents = Database.database().reference().child("students")
-    private let databaseReferenceToTeachers = Database.database().reference().child("teachers")
-    private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: .black)
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: .black)
+    private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: AppColor.blackColor)
+    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
 
     // MARK: - Properties
     private var handleAuthDidChangeListener: AuthStateDidChangeListenerHandle?
@@ -87,17 +84,10 @@ final class StartViewController: UIViewController {
     }
 
     private func isUserSignedIn() {
-        if defaults.bool(forKey: UserDefaults.Keys.isStudentSignedIn) {
+        if defaults.bool(forKey: UserDefaults.Keys.isUserLoggedIn) {
             present(
                 NavigationStackManager.instance.modalPresentFullScreenTabBarViewController(
-                    identifier: "StudentTabBarController"
-                ),
-                animated: true
-            )
-        } else if defaults.bool(forKey: UserDefaults.Keys.isTeacherSignedIn) {
-            present(
-                NavigationStackManager.instance.modalPresentFullScreenTabBarViewController(
-                    identifier: "TeacherTabBarController"
+                    identifier: UIStoryboard.Keys.mainTabBarController
                 ),
                 animated: true
             )

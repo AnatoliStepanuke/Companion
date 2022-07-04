@@ -39,4 +39,15 @@ final class NavigationStackManager {
 
         return viewController
     }
+
+    func modalPresentFullScreenViewController(viewController: UIViewController) -> UIViewController {
+        viewController.modalTransitionStyle = .coverVertical
+        viewController.modalPresentationStyle = .fullScreen
+
+        return viewController
+    }
+
+    func presentCollectionViewController(collectionVC: UICollectionViewController) -> UICollectionViewController {
+        return collectionVC
+    }
 }

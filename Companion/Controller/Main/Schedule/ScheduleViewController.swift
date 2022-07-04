@@ -91,6 +91,7 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         tableView.backgroundColor = AppColor.shadowColor
         tableView.rowHeight = 155
         tableView.separatorStyle = .none
@@ -111,6 +112,16 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
             "Sat."
         ])
         daysOfWeekSegmentedControl.addTarget(self, action: #selector(valueChangedSegmentedControl), for: .valueChanged)
+    }
+
+    // MARK: - Helpers
+    private func openScreenForSaveSubjectViewController() {
+        let screenForSaveScheduleViewController = ScreenForSaveSubjectViewController()
+        present(
+            NavigationStackManager.instance.modalPresentFullScreenViewController(
+                viewController: screenForSaveScheduleViewController
+            ), animated: true, completion: nil
+        )
     }
 
     // MARK: - Actions
@@ -146,12 +157,10 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
 
     // MARK: Objc Methods
     @objc private func plusButtonDidTapped() {
-        let screenForSaveScheduleViewController = ScreenForSaveScheduleViewController()
-        screenForSaveScheduleViewController.modalPresentationStyle = .fullScreen
-        present(screenForSaveScheduleViewController, animated: true, completion: nil)
+        openScreenForSaveSubjectViewController()
     }
 
-    @objc private func valueChangedSegmentedControl() {updateCurrentSchedule()}
+    @objc private func valueChangedSegmentedControl() { updateCurrentSchedule() }
 
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -169,5 +178,23 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
         cell.configure(using: filteredSchedule[indexPath.row])
 
         return cell
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Delete",
+            handler: { (_:UIContextualAction, _:UIView, _:(Bool) -> Void) in
+                self.filteredSchedule.remove(at: indexPath.row)
+                self.scheduleFromUserDefaults.remove(at: indexPath.row)
+                UserManager.instance.updateSchedulesFromUserDefaults(updatedSchedules: self.scheduleFromUserDefaults)
+                tableView.reloadData()
+            }
+        )
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }

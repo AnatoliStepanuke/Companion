@@ -35,6 +35,13 @@ final class UserManager {
         encode(schedules: schedules, key: ConstantsUserDefaults.scheduleList)
     }
 
+    func saveScheduleToUserDefaults2(updatedSchedules: [Schedule]) {
+        var schedules = getScheduleFromUserDefaults()
+        schedules.removeAll()
+        schedules = updatedSchedules
+        encode(schedules: schedules, key: ConstantsUserDefaults.scheduleList)
+    }
+
     func getScheduleFromUserDefaults() -> [Schedule] {
         decode(key: ConstantsUserDefaults.scheduleList)
     }

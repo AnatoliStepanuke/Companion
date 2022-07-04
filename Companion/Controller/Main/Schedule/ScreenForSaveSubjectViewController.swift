@@ -1,6 +1,8 @@
 import UIKit
 
-final class ScreenForSaveScheduleViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+final class ScreenForSaveSubjectViewController: UIViewController,
+                                                UIPickerViewDelegate,
+                                                UIPickerViewDataSource {
     // MARK: - Constants
     // MARK: - Private
     private let typesSubjects: [String] = ["No type subject", "Lecture", "Practice", "Lab", "Other"]
@@ -80,7 +82,7 @@ final class ScreenForSaveScheduleViewController: UIViewController, UIPickerViewD
             bottom: mainStackView.topAnchor,
             padding: .init(top: 12, left: 0, bottom: 8, right: 0)
         )
-       navigationStackView.heightAnchor.constraint(
+        navigationStackView.heightAnchor.constraint(
             equalTo: mainStackView.heightAnchor,
             multiplier: 0.1
         ).isActive = true
@@ -322,7 +324,7 @@ final class ScreenForSaveScheduleViewController: UIViewController, UIPickerViewD
 
     // MARK: - Picker view data source
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-       return 1
+        return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
