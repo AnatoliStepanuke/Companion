@@ -30,7 +30,6 @@
 		DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */; };
 		DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */; };
 		DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */; };
-		DC6F677D28215EA400481FE8 /* UserManager+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677C28215EA400481FE8 /* UserManager+constants.swift */; };
 		DC6F677F28215EAA00481FE8 /* UISegmentedControl+addItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */; };
 		DC6F678128215EBF00481FE8 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F678028215EBF00481FE8 /* UserManager.swift */; };
 		DC6F67852821653900481FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F67842821653900481FE8 /* Schedule.swift */; };
@@ -61,6 +60,7 @@
 		DCDA6431282579280002C09D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA6430282579280002C09D /* User.swift */; };
 		DCDA64332825B9370002C09D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA64322825B9370002C09D /* UserCell.swift */; };
 		DCDA64352825BC400002C09D /* User+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA64342825BC400002C09D /* User+constants.swift */; };
+		DCF504E7287445FC006489C6 /* UserManager+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF504E6287445FC006489C6 /* UserManager+constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,7 +83,6 @@
 		DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenForSaveSubjectViewController.swift; sourceTree = "<group>"; };
 		DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+roundedButton+colorButton.swift"; sourceTree = "<group>"; };
 		DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+singleton.swift"; sourceTree = "<group>"; };
-		DC6F677C28215EA400481FE8 /* UserManager+constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+constants.swift"; sourceTree = "<group>"; };
 		DC6F677E28215EAA00481FE8 /* UISegmentedControl+addItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+addItems.swift"; sourceTree = "<group>"; };
 		DC6F678028215EBF00481FE8 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		DC6F67842821653900481FE8 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		DCDA6430282579280002C09D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DCDA64322825B9370002C09D /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DCDA64342825BC400002C09D /* User+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+constants.swift"; sourceTree = "<group>"; };
+		DCF504E6287445FC006489C6 /* UserManager+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserManager+constants.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,12 +282,12 @@
 		DC96F3EA28352AB300774F49 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				DC6F677C28215EA400481FE8 /* UserManager+constants.swift */,
 				DC0AF03827BEC91B0006830F /* Schedule+constants.swift */,
 				DCDA64342825BC400002C09D /* User+constants.swift */,
 				DCC66222282D910900B915B2 /* UIImageView+constants.swift */,
 				DC96F3E8283524B600774F49 /* Chat+constants.swift */,
 				DCA8EE932842C6DC00B48A06 /* Message+constants.swift */,
+				DCF504E6287445FC006489C6 /* UserManager+constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -493,6 +493,7 @@
 				DCDA64332825B9370002C09D /* UserCell.swift in Sources */,
 				DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */,
 				DC9F9D7F282E682200D48201 /* CustomProfileUIImageViewWithConfig.swift in Sources */,
+				DCF504E7287445FC006489C6 /* UserManager+constants.swift in Sources */,
 				DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */,
 				DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */,
 				DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */,
@@ -508,7 +509,6 @@
 				DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */,
 				DC02F35F280499E500A336DC /* StartViewController.swift in Sources */,
 				DC7E040A27A98A1D00E036AE /* Companion.xcdatamodeld in Sources */,
-				DC6F677D28215EA400481FE8 /* UserManager+constants.swift in Sources */,
 				DCDA642F282553A70002C09D /* FirebaseManager.swift in Sources */,
 				DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */,
 				DC15FF7B280A049800F2D10B /* UserProfileViewController.swift in Sources */,
