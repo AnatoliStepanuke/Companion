@@ -15,6 +15,7 @@ final class MessengerTableViewController: UITableViewController {
     private var handleAuthDidChangeListener: AuthStateDidChangeListenerHandle?
     private var chats: [Chat] = []
     private var chatsDictionary = [String: Chat]()
+    private var timer: Timer?
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -82,6 +83,17 @@ final class MessengerTableViewController: UITableViewController {
         })
     }
 
+    private func reloadTableViewWithTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(self.handleReloadTable),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+
     // Firebase
     private func handleAuthListener() {
         handleAuthDidChangeListener = Auth.auth().addStateDidChangeListener { _, user in
@@ -127,9 +139,7 @@ final class MessengerTableViewController: UITableViewController {
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         self.sortChatsByUserID(dictionary: dictionary)
                         self.sortChatsbByTimeInterval()
-                        DispatchQueue.main.async(execute: {
-                            self.tableView.reloadData()
-                        })
+                        self.reloadTableViewWithTimer()
                     }
                 }
             }
@@ -209,5 +219,11 @@ final class MessengerTableViewController: UITableViewController {
     // MARK: Objc Methods
     @objc private func usersButtonDidTapped() {
         openUsersTableViewController()
+    }
+
+    @objc private func handleReloadTable() {
+        DispatchQueue.main.async(execute: {
+            self.tableView.reloadData()
+        })
     }
 }
