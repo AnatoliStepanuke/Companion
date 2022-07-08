@@ -216,7 +216,7 @@ final class MessengerTableViewController: UITableViewController {
         )
     }
 
-    // MARK: Objc Methods
+    // MARK: - Objc Methods
     @objc private func usersButtonDidTapped() {
         openUsersTableViewController()
     }

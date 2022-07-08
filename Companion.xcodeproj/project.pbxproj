@@ -52,6 +52,7 @@
 		DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE932842C6DC00B48A06 /* Message+constants.swift */; };
 		DCA8EE962845242E00B48A06 /* Storyboards+IdentifierKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */; };
 		DCB2046427B442AB00B26AAB /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB2046327B442AB00B26AAB /* UIView+constraints.swift */; };
+		DCC2D67528786089000402F4 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC2D67428786089000402F4 /* KeyboardManager.swift */; };
 		DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */; };
 		DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC66222282D910900B915B2 /* UIImageView+constants.swift */; };
 		DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA642828252EA40002C09D /* MessengerTableViewController.swift */; };
@@ -107,6 +108,7 @@
 		DCA8EE932842C6DC00B48A06 /* Message+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+constants.swift"; sourceTree = "<group>"; };
 		DCA8EE952845242E00B48A06 /* Storyboards+IdentifierKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+IdentifierKeys.swift"; sourceTree = "<group>"; };
 		DCB2046327B442AB00B26AAB /* UIView+constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
+		DCC2D67428786089000402F4 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+singleton.swift"; sourceTree = "<group>"; };
 		DCC66222282D910900B915B2 /* UIImageView+constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+constants.swift"; sourceTree = "<group>"; };
 		DCDA642828252EA40002C09D /* MessengerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerTableViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				DC6F678028215EBF00481FE8 /* UserManager.swift */,
 				DCDA642E282553A70002C09D /* FirebaseManager.swift */,
 				DC283CC3280EE19200C7042B /* NavigationStackManager.swift */,
+				DCC2D67428786089000402F4 /* KeyboardManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */,
 				DC283CC4280EE19200C7042B /* NavigationStackManager.swift in Sources */,
 				DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */,
+				DCC2D67528786089000402F4 /* KeyboardManager.swift in Sources */,
 				DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */,
 				DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */,
 				DC02F3612804A28C00A336DC /* LoginViewController.swift in Sources */,
