@@ -53,22 +53,25 @@ final class ChatCollectionViewController: UICollectionViewController,
 
     // MARK: - Setups
     private func setupCollectionView() {
-        collectionView?.contentInset = UIEdgeInsets(
+        collectionView.customContentViewDistanceSafeArea(
+            collectionView: collectionView,
             top: 64,
             left: 0,
-            bottom: 64,
-            right: 0
+            right: 0,
+            bottom: 64
         )
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(
+        collectionView?.customScrollViewDistanceSafeArea(
+            collectionView: collectionView,
             top: 64,
             left: 0,
-            bottom: 64,
-            right: 0
+            right: 0,
+            bottom: 64
         )
-        collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
-        collectionView.alwaysBounceVertical = true
         collectionView.addSubview(chatInputStackView)
         collectionView.addSubview(initialsStackView)
+        collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
     }
 
     private func setupColorMessageCell(message: Chat, cell: MessageCell) {
@@ -101,8 +104,8 @@ final class ChatCollectionViewController: UICollectionViewController,
     private func setupChatInputStackView() {
         chatInputStackView.anchor(
             top: nil,
-            leading: view.safeAreaLayoutGuide.leadingAnchor,
-            trailing: view.safeAreaLayoutGuide.trailingAnchor,
+            leading: collectionView.safeAreaLayoutGuide.leadingAnchor,
+            trailing: collectionView.safeAreaLayoutGuide.trailingAnchor,
             bottom: nil,
             size: .init(width: 0, height: 70)
         )
@@ -137,9 +140,9 @@ final class ChatCollectionViewController: UICollectionViewController,
 
     private func setupInitialsStackView() {
         initialsStackView.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            leading: view.safeAreaLayoutGuide.leadingAnchor,
-            trailing: view.safeAreaLayoutGuide.trailingAnchor,
+            top: collectionView.safeAreaLayoutGuide.topAnchor,
+            leading: collectionView.safeAreaLayoutGuide.leadingAnchor,
+            trailing: collectionView.safeAreaLayoutGuide.trailingAnchor,
             bottom: nil,
             size: .init(width: 0, height: 50)
         )
@@ -272,11 +275,6 @@ final class ChatCollectionViewController: UICollectionViewController,
     }
 
     // MARK: - Actions
-    // MARK: Objc Methods
-    @objc private func sendButtonDidTapped() {
-        sendMessage()
-    }
-
     // MARK: - CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
@@ -315,15 +313,31 @@ final class ChatCollectionViewController: UICollectionViewController,
     }
 
     // MARK: - Objc methods
+    @objc private func sendButtonDidTapped() {
+        sendMessage()
+    }
+
     @objc private func handleKeyboardWillShow(notification: Notification) {
         if let chatInputStackViewBottomAnchor = chatInputStackViewBottomAnchor {
             KeyboardManager.instance.getOpenKeyboardFrame(
                 notification: notification,
                 NSLayoutConstraint: chatInputStackViewBottomAnchor
             )
+            collectionView.customContentViewDistanceSafeArea(
+                collectionView: collectionView,
+                top: 64,
+                left: 0,
+                right: 0,
+                bottom: 384
+            )
+            collectionView.scrollToLastItem(
+                collectionView: collectionView,
+                position: .bottom,
+                animated: false
+            )
         }
         KeyboardManager.instance.getKeyboardAnimationDuration(
-            notification: notification, view: view
+            notification: notification, view: collectionView
         )
     }
 
@@ -332,9 +346,16 @@ final class ChatCollectionViewController: UICollectionViewController,
             KeyboardManager.instance.getHideKeyboardFrame(
                 NSLayoutConstraint: chatInputStackViewBottomAnchor
             )
+            collectionView.customContentViewDistanceSafeArea(
+                collectionView: collectionView,
+                top: 64,
+                left: 0,
+                right: 0,
+                bottom: 64
+            )
         }
         KeyboardManager.instance.getKeyboardAnimationDuration(
-            notification: notification, view: view
+            notification: notification, view: collectionView
         )
     }
 

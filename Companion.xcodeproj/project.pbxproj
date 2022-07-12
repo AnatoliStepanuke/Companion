@@ -25,6 +25,8 @@
 		DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */; };
 		DC49405C282C4CCB00448ACC /* UIIImageView+loadImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */; };
 		DC4CF89D281437E000DC1DA0 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */; };
+		DC4E5932287D9438003B2203 /* UICollectionView+scrollToLastItem+contentInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E5931287D9438003B2203 /* UICollectionView+scrollToLastItem+contentInsets.swift */; };
+		DC4E5934287DAC36003B2203 /* AlertManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E5933287DAC36003B2203 /* AlertManager+singleton.swift */; };
 		DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */; };
 		DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677428215CB000481FE8 /* CustomUITextField.swift */; };
 		DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */; };
@@ -79,6 +81,8 @@
 		DC494059282A699D00448ACC /* CustomProfileUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileUIImageView.swift; sourceTree = "<group>"; };
 		DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIIImageView+loadImages.swift"; sourceTree = "<group>"; };
 		DC4CF89C281437E000DC1DA0 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
+		DC4E5931287D9438003B2203 /* UICollectionView+scrollToLastItem+contentInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+scrollToLastItem+contentInsets.swift"; sourceTree = "<group>"; };
+		DC4E5933287DAC36003B2203 /* AlertManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertManager+singleton.swift"; sourceTree = "<group>"; };
 		DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 		DC6F677428215CB000481FE8 /* CustomUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITextField.swift; sourceTree = "<group>"; };
 		DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenForSaveSubjectViewController.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 			children = (
 				DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */,
 				DCC66220282D909600B915B2 /* FirebaseManager+singleton.swift */,
+				DC4E5933287DAC36003B2203 /* AlertManager+singleton.swift */,
 			);
 			path = Singleton;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */,
 				DCB2046327B442AB00B26AAB /* UIView+constraints.swift */,
 				DC49405B282C4CCB00448ACC /* UIIImageView+loadImages.swift */,
+				DC4E5931287D9438003B2203 /* UICollectionView+scrollToLastItem+contentInsets.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -499,6 +505,7 @@
 				DCF504E7287445FC006489C6 /* UserManager+constants.swift in Sources */,
 				DC7E040427A98A1D00E036AE /* ScheduleViewController.swift in Sources */,
 				DCC66223282D910900B915B2 /* UIImageView+constants.swift in Sources */,
+				DC4E5934287DAC36003B2203 /* AlertManager+singleton.swift in Sources */,
 				DCDA642928252EA40002C09D /* MessengerTableViewController.swift in Sources */,
 				DC96F3E52835175100774F49 /* Chat.swift in Sources */,
 				DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */,
@@ -511,6 +518,7 @@
 				DC0193172819800900A799C0 /* AlertManager.swift in Sources */,
 				DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */,
 				DC02F35F280499E500A336DC /* StartViewController.swift in Sources */,
+				DC4E5932287D9438003B2203 /* UICollectionView+scrollToLastItem+contentInsets.swift in Sources */,
 				DC7E040A27A98A1D00E036AE /* Companion.xcdatamodeld in Sources */,
 				DCDA642F282553A70002C09D /* FirebaseManager.swift in Sources */,
 				DCC66221282D909600B915B2 /* FirebaseManager+singleton.swift in Sources */,
