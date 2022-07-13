@@ -1,7 +1,8 @@
 import UIKit
 import Firebase
 
-final class ChatCollectionViewController: UICollectionViewController,
+final class ChatCollectionViewController:
+    UICollectionViewController,
     UITextFieldDelegate,
     UICollectionViewDelegateFlowLayout {
 
@@ -132,6 +133,9 @@ final class ChatCollectionViewController: UICollectionViewController,
         )
         inputTextField.delegate = self
         inputTextField.placeholder = "Enter message..."
+        inputTextField.autocapitalizationType = .sentences
+        inputTextField.keyboardType = .default
+        inputTextField.returnKeyType = .send
     }
 
     private func setupSendButton() {
@@ -239,7 +243,7 @@ final class ChatCollectionViewController: UICollectionViewController,
                     "timeInterval": timeInterval
                 ]
                 saveSenderAndRecipientMessageToDatabase(values: values, fromUserID: fromUserID, toUserID: toUserID)
-                inputTextField.text = ""
+                inputTextField.text?.removeAll()
             } else {
                 present(
                     AlertManager.instance.showAlert(
@@ -361,6 +365,6 @@ final class ChatCollectionViewController: UICollectionViewController,
 
     // MARK: - Touch responders
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
 }

@@ -1,12 +1,19 @@
 import UIKit
 
-final class CustomAuthtUITextField: UITextField {
+final class CustomAuthUITextField: UITextField {
     // MARK: - Init
-    init(placeholderText: String) {
+    init(
+        placeholderText: String,
+        autocapitalizationType: UITextAutocapitalizationType,
+        keyboardType: UIKeyboardType
+    ) {
         super.init(frame: .zero)
         setupHeightTextField()
         setupPlaceholderTextField(placeholderText: placeholderText)
-        setupKeyboardType()
+        setupKeyboardType(
+            autocapitalizationType: autocapitalizationType,
+            keyboardType: keyboardType
+        )
         setupBackgroundColor()
     }
 
@@ -23,10 +30,14 @@ final class CustomAuthtUITextField: UITextField {
         placeholder = placeholderText
     }
 
-    private func setupKeyboardType() {
-        keyboardType = UIKeyboardType.default
-        returnKeyType = UIReturnKeyType.done
+    private func setupKeyboardType(
+        autocapitalizationType: UITextAutocapitalizationType,
+        keyboardType: UIKeyboardType
+    ) {
+        self.keyboardType = keyboardType
+        self.autocapitalizationType = autocapitalizationType
         autocorrectionType = .no
+        returnKeyType = UIReturnKeyType.continue
     }
 
     private func setupBackgroundColor() {

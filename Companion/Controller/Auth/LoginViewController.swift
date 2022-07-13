@@ -2,13 +2,21 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Constants
     // MARK: - Private
     private let defaults = UserDefaults.standard
     private let mainStackView = UIStackView()
-    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
-    private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
+    private let emailTextField = CustomAuthUITextField(
+        placeholderText: "Email",
+        autocapitalizationType: .none,
+        keyboardType: .emailAddress
+    )
+    private let passwordTextField = CustomAuthUITextField(
+        placeholderText: "Password",
+        autocapitalizationType: .sentences,
+        keyboardType: .default
+    )
     private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: AppColor.blackColor)
     private let passwordRecoveryButton = UIButton(type: .system)
 
@@ -44,6 +52,8 @@ final class LoginViewController: UIViewController {
         mainStackView.addArrangedSubview(passwordTextField)
         mainStackView.addArrangedSubview(loginButton)
         mainStackView.addArrangedSubview(passwordRecoveryButton)
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     private func setupLoginButton() {
@@ -58,6 +68,14 @@ final class LoginViewController: UIViewController {
     }
 
     // MARK: - Helpers
+    private func switchToNextTextField(_ textField: UITextField) {
+        switch textField {
+        case emailTextField: passwordTextField.becomeFirstResponder()
+        case passwordTextField: makeUserLogin()
+        default: emailTextField.resignFirstResponder()
+        }
+    }
+
     // OpenVC
     private func openPasswordRecoveryViewController() {
         let passwordRecoveryViewController = PasswordRecoveryViewController()
@@ -116,6 +134,12 @@ final class LoginViewController: UIViewController {
             AlertManager.instance.showAlertEmptyFields(),
             animated: true, completion: nil
         )
+    }
+
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switchToNextTextField(textField)
+        return true
     }
 
     // MARK: - Actions

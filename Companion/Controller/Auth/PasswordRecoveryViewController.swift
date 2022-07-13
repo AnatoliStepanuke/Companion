@@ -1,12 +1,16 @@
 import UIKit
 import FirebaseAuth
 
-final class PasswordRecoveryViewController: UIViewController {
+final class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Constants
     // MARK: - Private
     private let mainStackView = UIStackView()
     private let passwordRecoveryLabel = CustomUILabel(text: "Enter email below to send link")
-    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
+    private let emailTextField = CustomAuthUITextField(
+        placeholderText: "Email",
+        autocapitalizationType: .none,
+        keyboardType: .emailAddress
+    )
     private let sendEmailButton = CustomRoundedUIButton(title: "Send", fontColor: .systemRed)
 
     // MARK: - Lifecycle
@@ -39,6 +43,7 @@ final class PasswordRecoveryViewController: UIViewController {
         mainStackView.addArrangedSubview(passwordRecoveryLabel)
         mainStackView.addArrangedSubview(emailTextField)
         mainStackView.addArrangedSubview(sendEmailButton)
+        emailTextField.delegate = self
     }
 
     private func setupSendEmailButton() {
@@ -46,6 +51,13 @@ final class PasswordRecoveryViewController: UIViewController {
     }
 
     // MARK: - Helpers
+    private func switchToNextTextField(_ textField: UITextField) {
+        switch textField {
+        case emailTextField: sendEmailButtonDidTapped()
+        default: emailTextField.resignFirstResponder()
+        }
+    }
+
     // Firebase
     // Send recovery link
     private func firebaseSendPasswordReset(email: String) {
@@ -94,6 +106,12 @@ final class PasswordRecoveryViewController: UIViewController {
     // MARK: Objc Methods
     @objc private func sendEmailButtonDidTapped() {
         makeSendEmail()
+    }
+
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switchToNextTextField(textField)
+        return true
     }
 
     // MARK: - Touch responders

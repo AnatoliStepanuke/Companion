@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC0193172819800900A799C0 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0193162819800900A799C0 /* AlertManager.swift */; };
-		DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */; };
+		DC01931B281ACE1800A799C0 /* CustomAuthUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01931A281ACE1800A799C0 /* CustomAuthUITextField.swift */; };
 		DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC01931C281AD3BA00A799C0 /* CustomRoundedUIButton.swift */; };
 		DC02F35F280499E500A336DC /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02F35E280499E500A336DC /* StartViewController.swift */; };
 		DC02F3612804A28C00A336DC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02F3602804A28C00A336DC /* LoginViewController.swift */; };
@@ -30,7 +30,7 @@
 		DC4E5936287DB05D003B2203 /* NavigationStackManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E5935287DB05D003B2203 /* NavigationStackManager+singleton.swift */; };
 		DC4E5938287DB088003B2203 /* KeyboardManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4E5937287DB088003B2203 /* KeyboardManager+singleton.swift */; };
 		DC66C1C3281AE75D00B537E1 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */; };
-		DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677428215CB000481FE8 /* CustomUITextField.swift */; };
+		DC6F677528215CB000481FE8 /* CustomScheduleUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677428215CB000481FE8 /* CustomScheduleUITextField.swift */; };
 		DC6F677728215E5600481FE8 /* ScreenForSaveSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */; };
 		DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */; };
 		DC6F677B28215E9800481FE8 /* UserManager+singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */; };
@@ -70,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		DC0193162819800900A799C0 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthtUITextField.swift; sourceTree = "<group>"; };
+		DC01931A281ACE1800A799C0 /* CustomAuthUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAuthUITextField.swift; sourceTree = "<group>"; };
 		DC01931C281AD3BA00A799C0 /* CustomRoundedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedUIButton.swift; sourceTree = "<group>"; };
 		DC02F35E280499E500A336DC /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		DC02F3602804A28C00A336DC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		DC4E5935287DB05D003B2203 /* NavigationStackManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationStackManager+singleton.swift"; sourceTree = "<group>"; };
 		DC4E5937287DB088003B2203 /* KeyboardManager+singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardManager+singleton.swift"; sourceTree = "<group>"; };
 		DC66C1C2281AE75D00B537E1 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
-		DC6F677428215CB000481FE8 /* CustomUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITextField.swift; sourceTree = "<group>"; };
+		DC6F677428215CB000481FE8 /* CustomScheduleUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScheduleUITextField.swift; sourceTree = "<group>"; };
 		DC6F677628215E5600481FE8 /* ScreenForSaveSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenForSaveSubjectViewController.swift; sourceTree = "<group>"; };
 		DC6F677828215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+roundedButton+colorButton.swift"; sourceTree = "<group>"; };
 		DC6F677A28215E9800481FE8 /* UserManager+singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserManager+singleton.swift"; sourceTree = "<group>"; };
@@ -327,8 +327,8 @@
 		DC9F9D842832891500D48201 /* UITextField */ = {
 			isa = PBXGroup;
 			children = (
-				DC01931A281ACE1800A799C0 /* CustomAuthtUITextField.swift */,
-				DC6F677428215CB000481FE8 /* CustomUITextField.swift */,
+				DC01931A281ACE1800A799C0 /* CustomAuthUITextField.swift */,
+				DC6F677428215CB000481FE8 /* CustomScheduleUITextField.swift */,
 			);
 			path = UITextField;
 			sourceTree = "<group>";
@@ -518,7 +518,7 @@
 				DCA8EE942842C6DC00B48A06 /* Message+constants.swift in Sources */,
 				DC9F9D81282EAA5500D48201 /* ChatCollectionViewController.swift in Sources */,
 				DC9F9D83283286D300D48201 /* CustomPlainUIButton.swift in Sources */,
-				DC6F677528215CB000481FE8 /* CustomUITextField.swift in Sources */,
+				DC6F677528215CB000481FE8 /* CustomScheduleUITextField.swift in Sources */,
 				DC49405A282A699D00448ACC /* CustomProfileUIImageView.swift in Sources */,
 				DC6F677928215E8B00481FE8 /* UIButton+roundedButton+colorButton.swift in Sources */,
 				DC7E040027A98A1D00E036AE /* AppDelegate.swift in Sources */,
@@ -545,7 +545,7 @@
 				DC02F3632804A83900A336DC /* SignupViewController.swift in Sources */,
 				DC01931D281AD3BA00A799C0 /* CustomRoundedUIButton.swift in Sources */,
 				DC283CC4280EE19200C7042B /* NavigationStackManager.swift in Sources */,
-				DC01931B281ACE1800A799C0 /* CustomAuthtUITextField.swift in Sources */,
+				DC01931B281ACE1800A799C0 /* CustomAuthUITextField.swift in Sources */,
 				DCC2D67528786089000402F4 /* KeyboardManager.swift in Sources */,
 				DC7E040227A98A1D00E036AE /* SceneDelegate.swift in Sources */,
 				DC96F3E9283524B600774F49 /* Chat+constants.swift in Sources */,
