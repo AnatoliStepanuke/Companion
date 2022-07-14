@@ -17,7 +17,14 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         autocapitalizationType: .sentences,
         keyboardType: .default
     )
-    private let loginButton = CustomRoundedUIButton(title: "Login", fontColor: AppColor.blackColor)
+    private let loginButton = CustomRoundedUIButton(
+        title: "Login",
+        buttonColor: AppColor.buttonColor,
+        fontColor: AppColor.fontColor,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
+
     private let passwordRecoveryButton = UIButton(type: .system)
 
     // MARK: - Lifecycle

@@ -8,8 +8,20 @@ final class StartViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private let companionLabel = UILabel()
     private let buttonsStackView = UIStackView()
-    private let loginButton = CustomRoundedUIButton(title: "Log in", fontColor: AppColor.blackColor)
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
+    private let loginButton = CustomRoundedUIButton(
+        title: "Log in",
+        buttonColor: AppColor.buttonColor,
+        fontColor: AppColor.fontColor,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
+    private let signupButton = CustomRoundedUIButton(
+        title: "Sign up",
+        buttonColor: AppColor.buttonColor,
+        fontColor: AppColor.fontColor,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
 
     // MARK: - Properties
     private var handleAuthDidChangeListener: AuthStateDidChangeListenerHandle?

@@ -13,7 +13,16 @@ final class ChatCollectionViewController:
     private let databaseReferenceToUserMessages = FirebaseManager.instance.databaseReferenceToMessagesByPerUser
     private let chatInputStackView = UIStackView()
     private let initialsStackView = UIStackView()
-    private let sendButton = CustomPlainUIButton(systemName: "paperplane", title: nil)
+    private let sendButton = CustomConfigurationUIButton(
+        config: .plain(),
+        imageName: "paperplane",
+        imagePadding: nil,
+        title: nil,
+        subtitle: nil,
+        textColor: AppColor.blackColor,
+        buttonColor: nil,
+        buttonHeight: nil
+    )
     private let inputTextField = UITextField()
     private let companionLabel = UILabel()
     private let messageFrameSize = CGSize(width: 250, height: 500)
@@ -73,6 +82,7 @@ final class ChatCollectionViewController:
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
         collectionView.alwaysBounceVertical = true
         collectionView.keyboardDismissMode = .interactive
+        collectionView.backgroundColor = AppColor.whiteColor2
     }
 
     private func setupColorMessageCell(message: Chat, cell: MessageCell) {
@@ -82,8 +92,8 @@ final class ChatCollectionViewController:
             cell.messageBubbleRightAnchor?.isActive = true
             cell.messageBubbleLeftAnchor?.isActive = false
         } else {
-            cell.messageBubbleView.backgroundColor = .systemGray5
-            cell.messageTextView.textColor = .black
+            cell.messageBubbleView.backgroundColor = AppColor.grayColor
+            cell.messageTextView.textColor = AppColor.fontColor
             cell.messageBubbleRightAnchor?.isActive = false
             cell.messageBubbleLeftAnchor?.isActive = true
         }
@@ -118,7 +128,7 @@ final class ChatCollectionViewController:
         chatInputStackView.addArrangedSubview(sendButton)
         chatInputStackView.alignment = .lastBaseline
         chatInputStackView.distribution = .equalCentering
-        chatInputStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        chatInputStackView.backgroundColor = AppColor.transparentWhiteColor
     }
 
     private func setupInputTextField() {
@@ -153,7 +163,7 @@ final class ChatCollectionViewController:
         initialsStackView.addArrangedSubview(companionLabel)
         initialsStackView.alignment = .center
         initialsStackView.distribution = .equalCentering
-        initialsStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        initialsStackView.backgroundColor = AppColor.transparentWhiteColor
     }
 
     private func setupCompanionLabel() {

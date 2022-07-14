@@ -50,7 +50,13 @@ final class SignupViewController:
     )
 
     // UIButton
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
+    private let signupButton = CustomRoundedUIButton(
+        title: "Sign up",
+        buttonColor: AppColor.buttonColor,
+        fontColor: AppColor.fontColor,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
 
     // MARK: - Properties
     // MARK: - Private

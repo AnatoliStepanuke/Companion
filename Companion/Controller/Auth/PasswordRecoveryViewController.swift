@@ -11,7 +11,13 @@ final class PasswordRecoveryViewController: UIViewController, UITextFieldDelegat
         autocapitalizationType: .none,
         keyboardType: .emailAddress
     )
-    private let sendEmailButton = CustomRoundedUIButton(title: "Send", fontColor: .systemRed)
+    private let sendEmailButton = CustomRoundedUIButton(
+        title: "Send",
+        buttonColor: AppColor.buttonColor,
+        fontColor: .systemRed,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
