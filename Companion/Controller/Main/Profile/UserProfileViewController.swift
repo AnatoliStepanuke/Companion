@@ -6,8 +6,26 @@ final class UserProfileViewController: UIViewController {
     // MARK: - Private
     private let defaults = UserDefaults.standard
     private let mainStackView = UIStackView()
-    private let signoutButton = UIButton()
-    private let changePasswordButton = UIButton()
+    private let signoutButton = CustomConfigurationUIButton(
+        config: .bordered(),
+        imageName: "person.fill.xmark",
+        imagePadding: 36,
+        title: "Sign out",
+        subtitle: "Return to auth screen",
+        textColor: AppColor.fontColor,
+        buttonColor: AppColor.buttonColor,
+        buttonHeight: 72
+    )
+    private let changePasswordButton = CustomConfigurationUIButton(
+        config: .bordered(),
+        imageName: "lock.shield.fill",
+        imagePadding: 36,
+        title: "Change password",
+        subtitle: "Open screen to change password",
+        textColor: AppColor.fontColor,
+        buttonColor: AppColor.buttonColor,
+        buttonHeight: 72
+    )
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,24 +65,10 @@ final class UserProfileViewController: UIViewController {
     }
 
     private func setupSignoutButton() {
-        signoutButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
-        signoutButton.configuration = .bordered()
-        signoutButton.configuration?.title = "Sign out"
-        signoutButton.configuration?.subtitle = "Return to auth screen"
-        signoutButton.configuration?.baseForegroundColor = .black
-        signoutButton.configuration?.image = UIImage(systemName: "person.fill.xmark")
-        signoutButton.configuration?.imagePadding = 36
         signoutButton.addTarget(self, action: #selector(signoutButtonDidTapped), for: .touchUpInside)
     }
 
     private func setupPasswordRecovery() {
-        changePasswordButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
-        changePasswordButton.configuration = .bordered()
-        changePasswordButton.configuration?.title = "Change password"
-        changePasswordButton.configuration?.subtitle = "Open screen to change password"
-        changePasswordButton.configuration?.baseForegroundColor = .black
-        changePasswordButton.configuration?.image = UIImage(systemName: "lock.shield.fill")
-        changePasswordButton.configuration?.imagePadding = 36
         changePasswordButton.addTarget(self, action: #selector(changePasswordButtonDidTapped), for: .touchUpInside)
     }
 

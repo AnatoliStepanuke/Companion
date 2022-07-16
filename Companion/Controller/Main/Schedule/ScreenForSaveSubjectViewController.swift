@@ -1,8 +1,9 @@
 import UIKit
 
 final class ScreenForSaveSubjectViewController: UIViewController,
-                                                UIPickerViewDelegate,
-                                                UIPickerViewDataSource {
+    UIPickerViewDelegate,
+    UIPickerViewDataSource,
+    UITextFieldDelegate {
     // MARK: - Constants
     // MARK: - Private
     private let typesSubjects: [String] = ["No type subject", "Lecture", "Practice", "Lab", "Other"]
@@ -17,10 +18,26 @@ final class ScreenForSaveSubjectViewController: UIViewController,
     private let saveButton = UIButton(type: .system)
 
     // Text Fields
-    private let subjectNameField = CustomUITextField(placeholderText: "Subject name")
-    private let buildingNumberField = CustomUITextField(placeholderText: "Building number")
-    private let audienceNumberField = CustomUITextField(placeholderText: "Audience number")
-    private let teacherNameField = CustomUITextField(placeholderText: "Teacher name")
+    private let subjectNameField = CustomScheduleUITextField(
+        placeholderText: "Subject name",
+        autocapitalizationType: .words,
+        keyboardType: .default
+    )
+    private let buildingNumberField = CustomScheduleUITextField(
+        placeholderText: "Building number",
+        autocapitalizationType: .allCharacters,
+        keyboardType: .numberPad
+    )
+    private let audienceNumberField = CustomScheduleUITextField(
+        placeholderText: "Audience number",
+        autocapitalizationType: .allCharacters,
+        keyboardType: .numberPad
+    )
+    private let teacherNameField = CustomScheduleUITextField(
+        placeholderText: "Teacher name",
+        autocapitalizationType: .words,
+        keyboardType: .default
+    )
 
     // Pickers
     private let typeSubjectPicker: UIPickerView = UIPickerView()
@@ -52,8 +69,6 @@ final class ScreenForSaveSubjectViewController: UIViewController,
         setupSaveButton()
         setupMainStackView()
         setupTextFieldsStackView()
-        setupBuildingNumberField()
-        setupAudienceNumberField()
         setupTypeSubjectPicker()
         setupClocksStackView()
         setupSubjectStartTimePicker()
@@ -145,14 +160,10 @@ final class ScreenForSaveSubjectViewController: UIViewController,
         textFieldsStackView.alignment = .fill
         textFieldsStackView.distribution = .fillEqually
         textFieldsStackView.spacing = 8
-    }
-
-    private func setupBuildingNumberField() {
-        buildingNumberField.keyboardType = .numberPad
-    }
-
-    private func setupAudienceNumberField() {
-        audienceNumberField.keyboardType = .numberPad
+        subjectNameField.delegate = self
+        buildingNumberField.delegate = self
+        audienceNumberField.delegate = self
+        teacherNameField.delegate = self
     }
 
     private func setupTypeSubjectPicker() {
@@ -244,6 +255,16 @@ final class ScreenForSaveSubjectViewController: UIViewController,
     }
 
     // MARK: - Helpers
+    private func switchToNextTextField(_ textField: UITextField) {
+        switch textField {
+        case subjectNameField: buildingNumberField.becomeFirstResponder()
+        case buildingNumberField: audienceNumberField.becomeFirstResponder()
+        case audienceNumberField: teacherNameField.becomeFirstResponder()
+        case teacherNameField: typeSubjectPicker.becomeFirstResponder()
+        default: subjectNameField.resignFirstResponder()
+        }
+    }
+
     private func handleTypesSubjectsLogic(row: Int) {
         if typeSubjectPicker.selectedRow(inComponent: 0) != 0 {
             selectedTypeSubject = typesSubjects[row]
@@ -338,6 +359,12 @@ final class ScreenForSaveSubjectViewController: UIViewController,
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         handleTypesSubjectsLogic(row: row)
+    }
+
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switchToNextTextField(textField)
+        return true
     }
 
     // MARK: - Actions

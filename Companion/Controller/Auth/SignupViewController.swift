@@ -3,7 +3,9 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 
-final class SignupViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+final class SignupViewController: UIViewController,
+    UITextFieldDelegate,
+    UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     // MARK: - Constants
     // MARK: - Private
     // UserDefaults
@@ -30,12 +32,30 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
     private let pickerController = UIImagePickerController()
 
     // UITextFields
-    private let nameTextField = CustomAuthtUITextField(placeholderText: "Name")
-    private let emailTextField = CustomAuthtUITextField(placeholderText: "Email")
-    private let passwordTextField = CustomAuthtUITextField(placeholderText: "Password")
+    private let nameTextField = CustomAuthUITextField(
+        placeholderText: "Name",
+        autocapitalizationType: .words,
+        keyboardType: .default
+    )
+    private let emailTextField = CustomAuthUITextField(
+        placeholderText: "Email",
+        autocapitalizationType: .none,
+        keyboardType: .emailAddress
+    )
+    private let passwordTextField = CustomAuthUITextField(
+        placeholderText: "Password",
+        autocapitalizationType: .sentences,
+        keyboardType: .default
+    )
 
     // UIButton
-    private let signupButton = CustomRoundedUIButton(title: "Sign up", fontColor: AppColor.blackColor)
+    private let signupButton = CustomRoundedUIButton(
+        title: "Sign up",
+        buttonColor: AppColor.buttonColor,
+        fontColor: AppColor.fontColor,
+        roundingRadius: 16,
+        buttonHeight: 36
+    )
 
     // MARK: - Properties
     // MARK: - Private
@@ -94,6 +114,9 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
         mainStackView.addArrangedSubview(emailTextField)
         mainStackView.addArrangedSubview(passwordTextField)
         mainStackView.addArrangedSubview(signupButton)
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
 
     private func setupSignupButton() {
@@ -101,6 +124,15 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     // MARK: - Helpers
+    private func switchToNextTextField(_ textField: UITextField) {
+        switch textField {
+        case nameTextField: emailTextField.becomeFirstResponder()
+        case emailTextField: passwordTextField.becomeFirstResponder()
+        case passwordTextField: makeUserSignup()
+        default: emailTextField.resignFirstResponder()
+        }
+    }
+
     // OpenVC
     private func openAndSaveTabBarViewController(defaultsforKey: String, identifier: String) {
         let pvc = self.presentingViewController
@@ -306,6 +338,12 @@ final class SignupViewController: UIViewController, UIImagePickerControllerDeleg
 
     @objc private func profileImageViewDidTapped() {
         openPickerController()
+    }
+
+    // MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switchToNextTextField(textField)
+        return true
     }
 
     // MARK: - Touch responders

@@ -16,7 +16,16 @@ final class ListOfUsersTableViewController: UIViewController, UITableViewDataSou
     )
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let typesOfUsersSegmentedControl = UISegmentedControl()
-    private let dismissButton = CustomPlainUIButton(systemName: nil, title: "Back")
+    private let dismissButton = CustomConfigurationUIButton(
+        config: .plain(),
+        imageName: nil,
+        imagePadding: nil,
+        title: "Back",
+        subtitle: nil,
+        textColor: .systemBlue,
+        buttonColor: nil,
+        buttonHeight: nil
+    )
     private let navigationStackView = UIStackView()
     private let mainStackView = UIStackView()
     private let pageTitle = UILabel()

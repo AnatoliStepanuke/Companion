@@ -2,12 +2,18 @@ import UIKit
 
 final class CustomRoundedUIButton: UIButton {
     // MARK: - Init
-    init(title: String, fontColor: UIColor) {
+    init(
+        title: String?,
+        buttonColor: UIColor?,
+        fontColor: UIColor?,
+        roundingRadius: CGFloat,
+        buttonHeight: CGFloat?
+    ) {
         super.init(frame: .zero)
-        setupHeightButton()
-        setupRoundedButton()
+        setupRoundedButton(roundingRadius: roundingRadius)
         setupTitleButton(title: title)
-        setupColorsButton(fontColor: fontColor)
+        setupColorsButton(buttonColor: buttonColor, fontColor: fontColor)
+        setupHeight(height: buttonHeight)
     }
 
     required init?(coder: NSCoder) {
@@ -15,20 +21,30 @@ final class CustomRoundedUIButton: UIButton {
     }
 
     // MARK: - Setups
-    private func setupHeightButton() {
-        heightAnchor.constraint(equalToConstant: 36).isActive = true
+    private func setupRoundedButton(roundingRadius: CGFloat) {
+        layer.cornerRadius = roundingRadius
     }
 
-    private func setupRoundedButton() {
-        layer.cornerRadius = 16
+    private func setupTitleButton(title: String?) {
+        if let title = title {
+            setTitle(title, for: .normal)
+        }
     }
 
-    private func setupTitleButton(title: String) {
-        setTitle(title, for: .normal)
+    private func setupColorsButton(buttonColor: UIColor?, fontColor: UIColor?) {
+        if let buttonColor = buttonColor {
+            if let fontColor = fontColor {
+                setTitleColor(fontColor, for: .normal)
+                backgroundColor = buttonColor
+            } else {
+                backgroundColor = buttonColor
+            }
+        }
     }
 
-    private func setupColorsButton(fontColor: UIColor) {
-        setTitleColor(fontColor, for: .normal)
-        backgroundColor = .systemGray4
+    private func setupHeight(height: CGFloat?) {
+        if let height = height {
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
     }
 }

@@ -2,8 +2,9 @@ import UIKit
 import Firebase
 
 final class ChatCollectionViewController: UICollectionViewController,
-                                          UITextFieldDelegate,
-                                          UICollectionViewDelegateFlowLayout {
+    UITextFieldDelegate,
+    UICollectionViewDelegateFlowLayout {
+
     // MARK: - Constants
     // MARK: Private
     private let databaseReferenceToMessagesCache = FirebaseManager.instance.databaseReferenceToMessagesCache
@@ -11,7 +12,16 @@ final class ChatCollectionViewController: UICollectionViewController,
     private let databaseReferenceToUserMessages = FirebaseManager.instance.databaseReferenceToMessagesByPerUser
     private let chatInputStackView = UIStackView()
     private let initialsStackView = UIStackView()
-    private let sendButton = CustomPlainUIButton(systemName: "paperplane", title: nil)
+    private let sendButton = CustomConfigurationUIButton(
+        config: .plain(),
+        imageName: "paperplane",
+        imagePadding: nil,
+        title: nil,
+        subtitle: nil,
+        textColor: AppColor.blackColor,
+        buttonColor: nil,
+        buttonHeight: nil
+    )
     private let inputTextField = UITextField()
     private let companionLabel = UILabel()
     private let messageFrameSize = CGSize(width: 250, height: 500)
@@ -21,6 +31,7 @@ final class ChatCollectionViewController: UICollectionViewController,
     // MARK: Private
     private var messages: [Chat] = []
     private var messageHeight: CGFloat?
+    private var chatInputStackViewBottomAnchor: NSLayoutConstraint?
 
     // MARK: Public
     var user: User? {
@@ -34,31 +45,43 @@ final class ChatCollectionViewController: UICollectionViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupChatInputContainerView()
+        setupChatInputStackView()
         setupInputTextField()
         setupSendButton()
         setupInitialsStackView()
         setupCompanionLabel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        handleKeyboardObservers()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        removeHandleKeyboardObservers()
+    }
+
     // MARK: - Setups
     private func setupCollectionView() {
-        collectionView?.contentInset = UIEdgeInsets(
-            top: 8,
+        collectionView.customContentViewDistanceSafeArea(
+            collectionView: collectionView,
+            top: 64,
             left: 0,
-            bottom: 72,
-            right: 0
+            right: 0,
+            bottom: 64
         )
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(
-            top: 8,
+        collectionView?.customScrollViewDistanceSafeArea(
+            collectionView: collectionView,
+            top: 64,
             left: 0,
-            bottom: 72,
-            right: 0
+            right: 0,
+            bottom: 64
         )
-        collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
-        collectionView.alwaysBounceVertical = true
         collectionView.addSubview(chatInputStackView)
         collectionView.addSubview(initialsStackView)
+        collectionView.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.Constants.messageCell)
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
+        collectionView.backgroundColor = AppColor.whiteColor2
     }
 
     private func setupColorMessageCell(message: Chat, cell: MessageCell) {
@@ -68,8 +91,8 @@ final class ChatCollectionViewController: UICollectionViewController,
             cell.messageBubbleRightAnchor?.isActive = true
             cell.messageBubbleLeftAnchor?.isActive = false
         } else {
-            cell.messageBubbleView.backgroundColor = .systemGray5
-            cell.messageTextView.textColor = .black
+            cell.messageBubbleView.backgroundColor = AppColor.grayColor
+            cell.messageTextView.textColor = AppColor.fontColor
             cell.messageBubbleRightAnchor?.isActive = false
             cell.messageBubbleLeftAnchor?.isActive = true
         }
@@ -88,19 +111,23 @@ final class ChatCollectionViewController: UICollectionViewController,
         }
     }
 
-    private func setupChatInputContainerView() {
+    private func setupChatInputStackView() {
         chatInputStackView.anchor(
             top: nil,
-            leading: view.safeAreaLayoutGuide.leadingAnchor,
-            trailing: view.safeAreaLayoutGuide.trailingAnchor,
-            bottom: initialsStackView.topAnchor,
-            size: .init(width: 0, height: 50)
+            leading: collectionView.safeAreaLayoutGuide.leadingAnchor,
+            trailing: collectionView.safeAreaLayoutGuide.trailingAnchor,
+            bottom: nil,
+            size: .init(width: 0, height: 70)
         )
+        chatInputStackViewBottomAnchor = chatInputStackView.bottomAnchor.constraint(
+            equalTo: view.bottomAnchor
+        )
+        chatInputStackViewBottomAnchor?.isActive = true
         chatInputStackView.addArrangedSubview(inputTextField)
         chatInputStackView.addArrangedSubview(sendButton)
-        chatInputStackView.alignment = .center
+        chatInputStackView.alignment = .lastBaseline
         chatInputStackView.distribution = .equalCentering
-        chatInputStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        chatInputStackView.backgroundColor = AppColor.transparentWhiteColor
     }
 
     private func setupInputTextField() {
@@ -115,6 +142,9 @@ final class ChatCollectionViewController: UICollectionViewController,
         )
         inputTextField.delegate = self
         inputTextField.placeholder = "Enter message..."
+        inputTextField.autocapitalizationType = .sentences
+        inputTextField.keyboardType = .default
+        inputTextField.returnKeyType = .send
     }
 
     private func setupSendButton() {
@@ -123,16 +153,16 @@ final class ChatCollectionViewController: UICollectionViewController,
 
     private func setupInitialsStackView() {
         initialsStackView.anchor(
-            top: chatInputStackView.bottomAnchor,
-            leading: view.safeAreaLayoutGuide.leadingAnchor,
-            trailing: view.safeAreaLayoutGuide.trailingAnchor,
-            bottom: view.bottomAnchor,
+            top: collectionView.safeAreaLayoutGuide.topAnchor,
+            leading: collectionView.safeAreaLayoutGuide.leadingAnchor,
+            trailing: collectionView.safeAreaLayoutGuide.trailingAnchor,
+            bottom: nil,
             size: .init(width: 0, height: 50)
         )
         initialsStackView.addArrangedSubview(companionLabel)
-        initialsStackView.alignment = .top
+        initialsStackView.alignment = .center
         initialsStackView.distribution = .equalCentering
-        initialsStackView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        initialsStackView.backgroundColor = AppColor.transparentWhiteColor
     }
 
     private func setupCompanionLabel() {
@@ -141,46 +171,25 @@ final class ChatCollectionViewController: UICollectionViewController,
     }
 
     // MARK: - Helpers
-    private func saveSenderAndRecipientMessageToDatabase(values: [String: Any], fromUserID: String, toUserID: String) {
-        let databaseReferenceToUniqueMessageID = databaseReferenceToMessagesCache.childByAutoId()
+    private func handleKeyboardObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
 
-        databaseReferenceToUniqueMessageID.updateChildValues(values) { error, _ in
-            if error == nil {
-                let messageID = databaseReferenceToUniqueMessageID.key
-                if let messageID = messageID {
-                    self.databaseReferenceToUserMessages.child(fromUserID).updateChildValues([messageID: 1])
-                    self.databaseReferenceToUserMessages.child(toUserID).updateChildValues([messageID: 1])
-                }
-            } else {
-                self.showAlertError(error: error)
-            }
-        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
-    private func sendMessage() {
-        let text = inputTextField.text ?? "message"
-        let timeInterval = Int(Date().timeIntervalSince1970)
-
-        if !text.isEmpty {
-            if let toUserID = user?.id,
-               let fromUserID = Auth.auth().currentUser?.uid {
-                let values: [String: Any] = [
-                    "text": text,
-                    "toUserID": toUserID,
-                    "fromUserID": fromUserID,
-                    "timeInterval": timeInterval
-                ]
-                saveSenderAndRecipientMessageToDatabase(values: values, fromUserID: fromUserID, toUserID: toUserID)
-                inputTextField.text = ""
-            } else {
-                present(
-                    AlertManager.instance.showAlert(
-                        title: "Error",
-                        message: "The requested UserID has not found."
-                    ), animated: true
-                )
-            }
-        }
+    private func removeHandleKeyboardObservers() {
+        NotificationCenter.default.removeObserver(UIResponder.keyboardWillShowNotification)
+        NotificationCenter.default.removeObserver(UIResponder.keyboardWillHideNotification)
     }
 
     private func estimateFrameForTextMessage(text: String) -> CGRect {
@@ -212,19 +221,69 @@ final class ChatCollectionViewController: UICollectionViewController,
     // Firebase
     private func fetchMessages() {
         if let userID = Auth.auth().currentUser?.uid {
-            databaseReferenceToUserMessages.child(userID).observe(.childAdded) { snapshot in
-                let messageID = snapshot.key
-                self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        let message = Chat(dictionary: dictionary)
-                        if message.chatPartnerId() == self.user?.id {
-                            self.messages.append(message)
-                            DispatchQueue.main.async(execute: {
-                                self.collectionView?.reloadData()
-                            })
+            if let toUserID = user?.id {
+                databaseReferenceToUserMessages.child(userID).child(toUserID).observe(.childAdded) { snapshot in
+                    let messageID = snapshot.key
+                    self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
+                        if let dictionary = snapshot.value as? [String: AnyObject] {
+                            let message = Chat(dictionary: dictionary)
+                            if message.chatPartnerId() == self.user?.id {
+                                self.messages.append(message)
+                                DispatchQueue.main.async(execute: {
+                                    self.collectionView?.reloadData()
+                                })
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private func sendMessage() {
+        let text = inputTextField.text ?? "message"
+        let timeInterval = Int(Date().timeIntervalSince1970)
+
+        if !text.isEmpty {
+            if let toUserID = user?.id,
+               let fromUserID = Auth.auth().currentUser?.uid {
+                let values: [String: Any] = [
+                    "text": text,
+                    "toUserID": toUserID,
+                    "fromUserID": fromUserID,
+                    "timeInterval": timeInterval
+                ]
+                saveSenderAndRecipientMessageToDatabase(values: values, fromUserID: fromUserID, toUserID: toUserID)
+                inputTextField.text?.removeAll()
+            } else {
+                present(
+                    AlertManager.instance.showAlert(
+                        title: "Error",
+                        message: "The requested UserID has not found."
+                    ), animated: true
+                )
+            }
+        }
+    }
+
+    private func saveSenderAndRecipientMessageToDatabase(values: [String: Any], fromUserID: String, toUserID: String) {
+        let databaseReferenceToUniqueMessageID = databaseReferenceToMessagesCache.childByAutoId()
+
+        databaseReferenceToUniqueMessageID.updateChildValues(values) { error, _ in
+            if error == nil {
+                let messageID = databaseReferenceToUniqueMessageID.key
+                if let messageID = messageID {
+                    self.databaseReferenceToUserMessages
+                        .child(fromUserID)
+                        .child(toUserID)
+                        .updateChildValues([messageID: 1])
+                    self.databaseReferenceToUserMessages
+                        .child(toUserID)
+                        .child(fromUserID)
+                        .updateChildValues([messageID: 1])
+                }
+            } else {
+                self.showAlertError(error: error)
             }
         }
     }
@@ -237,11 +296,6 @@ final class ChatCollectionViewController: UICollectionViewController,
     }
 
     // MARK: - Actions
-    // MARK: Objc Methods
-    @objc private func sendButtonDidTapped() {
-        sendMessage()
-    }
-
     // MARK: - CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
@@ -279,8 +333,55 @@ final class ChatCollectionViewController: UICollectionViewController,
         return true
     }
 
+    // MARK: - Objc methods
+    @objc private func sendButtonDidTapped() {
+        sendMessage()
+    }
+
+    @objc private func handleKeyboardWillShow(notification: Notification) {
+        if let chatInputStackViewBottomAnchor = chatInputStackViewBottomAnchor {
+            KeyboardManager.instance.getOpenKeyboardFrame(
+                notification: notification,
+                NSLayoutConstraint: chatInputStackViewBottomAnchor
+            )
+            collectionView.customContentViewDistanceSafeArea(
+                collectionView: collectionView,
+                top: 64,
+                left: 0,
+                right: 0,
+                bottom: 384
+            )
+            collectionView.scrollToLastItem(
+                collectionView: collectionView,
+                position: .bottom,
+                animated: false
+            )
+        }
+        KeyboardManager.instance.getKeyboardAnimationDuration(
+            notification: notification, view: collectionView
+        )
+    }
+
+    @objc private func handleKeyboardWillHide(notification: Notification) {
+        if let chatInputStackViewBottomAnchor = chatInputStackViewBottomAnchor {
+            KeyboardManager.instance.getHideKeyboardFrame(
+                NSLayoutConstraint: chatInputStackViewBottomAnchor
+            )
+            collectionView.customContentViewDistanceSafeArea(
+                collectionView: collectionView,
+                top: 64,
+                left: 0,
+                right: 0,
+                bottom: 64
+            )
+        }
+        KeyboardManager.instance.getKeyboardAnimationDuration(
+            notification: notification, view: collectionView
+        )
+    }
+
     // MARK: - Touch responders
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
 }

@@ -194,7 +194,6 @@ final class ScheduleViewController: UIViewController, UITableViewDataSource, UIT
                 tableView.reloadData()
             }
         )
-
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
