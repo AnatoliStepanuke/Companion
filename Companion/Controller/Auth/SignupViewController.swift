@@ -3,8 +3,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 
-final class SignupViewController:
-    UIViewController,
+final class SignupViewController: UIViewController,
     UITextFieldDelegate,
     UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     // MARK: - Constants

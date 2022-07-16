@@ -1,8 +1,7 @@
 import UIKit
 import Firebase
 
-final class ChatCollectionViewController:
-    UICollectionViewController,
+final class ChatCollectionViewController: UICollectionViewController,
     UITextFieldDelegate,
     UICollectionViewDelegateFlowLayout {
 
@@ -222,16 +221,18 @@ final class ChatCollectionViewController:
     // Firebase
     private func fetchMessages() {
         if let userID = Auth.auth().currentUser?.uid {
-            databaseReferenceToUserMessages.child(userID).observe(.childAdded) { snapshot in
-                let messageID = snapshot.key
-                self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        let message = Chat(dictionary: dictionary)
-                        if message.chatPartnerId() == self.user?.id {
-                            self.messages.append(message)
-                            DispatchQueue.main.async(execute: {
-                                self.collectionView?.reloadData()
-                            })
+            if let toUserID = user?.id {
+                databaseReferenceToUserMessages.child(userID).child(toUserID).observe(.childAdded) { snapshot in
+                    let messageID = snapshot.key
+                    self.databaseReferenceToMessagesCache.child(messageID).observeSingleEvent(of: .value) { snapshot in
+                        if let dictionary = snapshot.value as? [String: AnyObject] {
+                            let message = Chat(dictionary: dictionary)
+                            if message.chatPartnerId() == self.user?.id {
+                                self.messages.append(message)
+                                DispatchQueue.main.async(execute: {
+                                    self.collectionView?.reloadData()
+                                })
+                            }
                         }
                     }
                 }
@@ -272,8 +273,14 @@ final class ChatCollectionViewController:
             if error == nil {
                 let messageID = databaseReferenceToUniqueMessageID.key
                 if let messageID = messageID {
-                    self.databaseReferenceToUserMessages.child(fromUserID).updateChildValues([messageID: 1])
-                    self.databaseReferenceToUserMessages.child(toUserID).updateChildValues([messageID: 1])
+                    self.databaseReferenceToUserMessages
+                        .child(fromUserID)
+                        .child(toUserID)
+                        .updateChildValues([messageID: 1])
+                    self.databaseReferenceToUserMessages
+                        .child(toUserID)
+                        .child(fromUserID)
+                        .updateChildValues([messageID: 1])
                 }
             } else {
                 self.showAlertError(error: error)

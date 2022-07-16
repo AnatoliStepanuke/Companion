@@ -1,7 +1,6 @@
 import UIKit
 
-final class ScreenForSaveSubjectViewController:
-    UIViewController,
+final class ScreenForSaveSubjectViewController: UIViewController,
     UIPickerViewDelegate,
     UIPickerViewDataSource,
     UITextFieldDelegate {
