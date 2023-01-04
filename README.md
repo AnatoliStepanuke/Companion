@@ -5,8 +5,12 @@
 + UIKit
 + MVC
 + Firebase
+  + Auth
+  + Realtime Database
+  + Storage
 + Grand Central Dispatch
 + UserDefaults
++ Swift Package Manager
 
 ## Design
 ### Auth
