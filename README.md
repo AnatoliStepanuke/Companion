@@ -6,11 +6,19 @@
 + MVC
 + Firebase
   + Auth
-  + Realtime Database
+  + Database
   + Storage
 + Grand Central Dispatch
 + UserDefaults
 + Swift Package Manager
+
+## Installation
+[Swift Package Manager](https://www.swift.org/package-manager/) lets you manage your project dependencies, allowing you to import libraries into your applications.
+To integrate [Firebase](https://firebase.google.com) into your Xcode project using SPM, follow install steps below:
+1. Select **File > Add Packages...**
+2. Add the Github [URL](https://github.com/firebase/firebase-ios-sdk.git) of the Package file.
+3. Select the **firebase-ios-sdk** package product, select dependency rule and select Add Package.
+4. Choose the Firebase products: **FirebaseAuth**, **FirebaseDatabase**, **FirebaseStorage** and press Add Package button again.
 
 ## Design
 <img width="1017" alt="Screenshot 2023-01-04 at 4 27 36 PM" src="https://user-images.githubusercontent.com/70813562/210565294-c0bf0cc0-54cb-4413-9c2a-664a2b2ff893.png">
