@@ -1,5 +1,8 @@
 # Companion
-Дипломный проект на тему: "Программное обеспечение для мобильных устройств на платформе iOS для коммуникации между студентами и преподавателями".
+This app is designed to improve communication in educational establishments with abilities:
++ Finding registered students and teachers;
++ Sending messages to each other;
++ Creating your own schedule.
 
 ## Technologies
 + UIKit
